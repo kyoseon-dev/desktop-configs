@@ -1,0 +1,23 @@
+#panel {
+	transition-duration: 250ms;
+
+	background-color: rgba(20, 23, 26, 1.0);
+
+	border-radius: 1.5em 1.5em 0 0;
+	/*
+	border: 1px solid rgba(31, 31, 31, 0.3);
+	*/
+}
+
+#panel .panel-button {
+	font-weight: normal;
+	color: #dddecc;
+
+	margin-bottom: 2px;
+}
+
+#panel .panel-button:hover {
+}
+
+#panel .panel-button:active {
+}

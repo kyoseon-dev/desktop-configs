@@ -1,0 +1,10 @@
+lastupdatecheck: 0
+recentrepos:
+- /ext/kyoseon/.config/nvim
+- /ext/kyoseon/.local/share/.password-store
+- /ext/kyoseon/Documents/notes
+- /ext/kyoseon/work/projects/phantom
+startuppopupversion: 5
+customcommandshistory: []
+hidecommandlog: false
+ignorewhitespaceindiffview: false
