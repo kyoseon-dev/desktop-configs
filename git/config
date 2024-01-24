@@ -1,0 +1,10 @@
+[user]
+	signingkey = 5C749DD4F2E50C4E
+#	email = kyoseonk@gmail.com
+#	name = kyoseonk
+	email = kyoseon.dev@gmail.com
+	name = kyoseon-dev
+[pull]
+	rebase = false
+[commit]
+	gpgsign = true
