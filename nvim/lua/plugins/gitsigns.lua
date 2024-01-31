@@ -45,5 +45,6 @@ return {
 				enable = false
 			},
 		}
+		vim.keymap.set("n", "<leader>sd", ":Gitsigns preview_hunk<CR>", {})
 	end,
 }
