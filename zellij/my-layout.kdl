@@ -1,0 +1,20 @@
+layout {
+	pane size=1 borderless=true {
+		plugin location="zellij:tab-bar"
+	}
+	pane split_direction="vertical" {
+		pane name="main" {
+			cwd "~/Repository"
+		}
+		pane split_direction="horizontal" {
+			pane name="worker" size="70%" {
+				cwd "~/.config"
+				focus true
+			}
+			pane name="monitor"
+		}
+	}
+   pane size=2 borderless=true {
+		plugin location="zellij:status-bar"
+   }
+}
