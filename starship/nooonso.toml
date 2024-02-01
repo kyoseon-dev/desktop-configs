@@ -1,8 +1,8 @@
 #format = '[░▒▓](fg:7)[ $time  ]($style)'
+
 format = """
 $directory\
 $git_branch\
-$git_status\
 $nodejs\
 $rust\
 $golang\
