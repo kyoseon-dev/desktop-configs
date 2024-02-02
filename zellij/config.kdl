@@ -1,5 +1,7 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds clear-defaults=true {
+	 shared {
+	 }
     normal {
         // uncomment this and adjust key if using copy_on_select=false
         bind "Alt c" { Copy; }
@@ -122,10 +124,8 @@ keybinds clear-defaults=true {
         }
     }
     tmux {
-        //bind "[" { SwitchToMode "Scroll"; }
-        bind "[" { EditScrollback; SwitchToMode "Normal"; }
-        //bind "Ctrl s" "Ctrl c" "Ctrl [" { Write 2; SwitchToMode "Normal"; }
         bind "Ctrl s" "Ctrl c" "Ctrl [" { SwitchToMode "Normal"; }
+        bind "[" { EditScrollback; SwitchToMode "Normal"; }
         bind "\"" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "%" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
@@ -150,6 +150,7 @@ keybinds clear-defaults=true {
         //bind "Ctrl g" { SwitchToMode "Locked"; }
         //bind "Ctrl q" { Quit; }
         //bind "Alt n" { NewPane; }
+		  bind "Alt r" { FocusNextPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
@@ -206,7 +207,7 @@ plugins {
 //    - true
 //    - false (Default)
 //
-simplified_ui true
+simplified_ui false
 
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
@@ -288,10 +289,16 @@ themes {
 //
 theme "gruvbox-dark"
 
+ui {
+   pane_frames {
+	   rounded_corners true
+	}
+}
+
 // The name of the default layout to load on startup
 // Default: "default"
 //
-default_layout "compact"
+default_layout "nooonso"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
