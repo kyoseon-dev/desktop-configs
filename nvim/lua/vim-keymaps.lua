@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>s", "<cmd>w<CR>", {})
 vim.keymap.set("n", "<leader>q", "<cmd>qa<CR>", {})
 vim.keymap.set("n", "<leader>c", "<cmd>q<CR>", {})
 --vim.keymap.set("n", "<leader>c", "<C-w>c", {})
-vim.keymap.set("n", "<leader>g", "<cmd>!zellij run -f -c -- ~/.local/bin/lazygit<CR>", {})
+vim.keymap.set("n", "<leader>g", "<cmd>!zellij run -f -c -- lazygit<CR>", {})
 
 vim.keymap.set("n", "<leader>w", "<cmd>set wrap!<CR>", {})
 vim.keymap.set("n", "<leader>r", "<cmd>noh<CR>", {})
