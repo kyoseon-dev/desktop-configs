@@ -9,7 +9,7 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
-setopt share_history
+#setopt share_history
 
 setopt autocd beep extendedglob nomatch notify
 
@@ -49,4 +49,5 @@ alias ls="eza --icons=always"
 alias getp="ps waxf|/usr/bin/grep -v grep|/usr/bin/grep "
 alias nvim-config="(cd ~/.config/nvim; nvim -c ':Neotree filesystem reveal left' lua/vim-keymaps.lua)"
 alias nvi="nvim -c ':Neotree filesystem reveal left'"
+alias ze="zellij edit -f"
 alias asp="cat ~/tmp/fedora.txt | fzf"

@@ -2,7 +2,8 @@ export STARSHIP_CONFIG=$HOME/.config/starship/starship.toml
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
-source /usr/share/skim/shell/key-bindings.zsh
+#source /usr/share/skim/shell/key-bindings.zsh
+source /usr/share/fzf/shell/key-bindings.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/fzf-tab.zsh
