@@ -3,11 +3,12 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.autoindent = true
 vim.opt.bs = "indent,eol,start"
 vim.opt.cursorline = true
---vim.opt.cursorcolumn = true
+vim.opt.cursorcolumn = true
 vim.opt.expandtab = false
 vim.opt.timeoutlen = 1000
 vim.opt.ttimeoutlen = 0
 vim.opt.wrap = false
+--vim.opt.scrolloff = 999
 
 vim.opt.list = true
 vim.opt.listchars = {
@@ -33,6 +34,7 @@ vim.opt.softtabstop = 3
 vim.opt.shiftwidth = 3
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 vim.opt.signcolumn = "yes"
 
 vim.g.loaded_node_provider = 0

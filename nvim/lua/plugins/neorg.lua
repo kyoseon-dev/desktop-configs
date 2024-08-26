@@ -29,18 +29,20 @@ return {
 						workspaces = {
 							techs = "~/Documents/notes/techs",
 							racing = "~/Documents/notes/racing",
+							music = "~/Documents/notes/music",
 						},
-						default_workspace = "techs",
+						default_workspace = "music",
 						index = "index.norg",
 					},
 				},
 			},
 		})
-		vim.wo.conceallevel = 1
+		vim.wo.conceallevel = 2
 		vim.wo.concealcursor = ""
 		--vim.wo.concealcursor = "nv"
 
-		vim.keymap.set("n", "<leader>oi", ':Neorg workspace ', {})
+		vim.keymap.set("n", "<leader>oi", ':Neorg index<CR>', {})
+		vim.keymap.set("n", "<leader>ow", ':Neorg workspace ', {})
 		vim.keymap.set("n", "<leader>ot", '<cmd>Neorg toggle-concealer<CR>', {})
 	end,
 }
