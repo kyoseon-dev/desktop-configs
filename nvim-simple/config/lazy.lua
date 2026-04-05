@@ -1,8 +1,3 @@
----@diagnostic disable: undefined-global
-vim.loader.enable()
-
-require("vim-keymaps")
-require("vim-options")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then

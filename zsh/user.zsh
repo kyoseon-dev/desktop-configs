@@ -16,6 +16,8 @@ setopt autocd beep extendedglob nomatch notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
 
+set -o emacs
+
 # The following lines were added by compinstall
 zstyle :compinstall filename "$ZDOTDIR/.zshrc"
 
@@ -45,7 +47,6 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias cat="bat"
 alias grep="rg"
-alias ls="eza --icons=always"
 alias getp="ps waxf|/usr/bin/grep -v grep|/usr/bin/grep "
 alias nvim-config="(cd ~/.config/nvim; nvim -c ':Neotree filesystem reveal left' lua/vim-keymaps.lua)"
 alias nvi="nvim -c ':Neotree filesystem reveal left'"

@@ -3,6 +3,7 @@ return {
 	lazy = false,
 	name = "gruvbox",
 	priority = 1000,
+	enabled = false,
 
 	config = function()
 		local pallete = {
