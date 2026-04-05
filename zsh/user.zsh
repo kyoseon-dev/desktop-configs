@@ -41,14 +41,14 @@ export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 export CARGO_HOME=~/.local/share/cargo
 
-alias vi="nvim"
+alias vi="/ext/kyoseon/nvim-linux-x86_64/bin/nvim"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
 alias cat="bat"
 alias grep="rg"
 alias getp="ps waxf|/usr/bin/grep -v grep|/usr/bin/grep "
-alias nvim-config="(cd ~/.config/nvim; nvim -c ':Neotree filesystem reveal left' lua/vim-keymaps.lua)"
+alias nvim-config="(cd ~/.config/nvim; nvim -c ':Neotree filesystem reveal left' lua/config/keymaps.lua)"
 alias nvi="nvim -c ':Neotree filesystem reveal left'"
 alias ze="zellij edit -f"
 alias asp="cat ~/tmp/fedora.txt | fzf"
