@@ -1,9 +1,11 @@
 vim.pack.add({
-	{ src = "https://github.com/lewis6991/gitsigns.nvim", },
+	{
+		src = "https://github.com/lewis6991/gitsigns.nvim",
+		event = { "BufReadPre", "BufNewFile" },
+	},
 })
 
 require("gitsigns").setup({
-	event = { "BufReadPre", "BufNewFile" },
 	signs                        = {
 		add          = { text = '+' },
 		change       = { text = '│' },
