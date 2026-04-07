@@ -2,10 +2,8 @@ vim.pack.add({
 	{
 		src = "https://github.com/nvim-neorg/neorg",
 	},
-	{
-		src = "https://github.com/nvim-treesitter/nvim-treesitter",
-		version = "master",
-	},
+
+	-- dependencies
 	"https://github.com/pysan3/pathlib.nvim",
 	"https://github.com/nvim-neotest/nvim-nio",
 	"https://github.com/nvim-neorg/lua-utils.nvim",
@@ -13,43 +11,21 @@ vim.pack.add({
 	"https://github.com/nvim-lua/plenary.nvim",
 })
 
-require("nvim-treesitter.configs").setup({
-	auto_install = true,
-	ensure_installed = { "lua", "rust", "toml", "markdown", "norg" },
-	highlight = {
-		enabled = true,
-		additional_vim_regex_highlighting = { 'markdown' },
-	},
-	indent = { enabled = true },
-
-	rainbow = {
-		enable = true,
-		extended_mode = true,
-		max_file_lines = nil,
-	}
-})
-
 require("neorg").setup({
 	-- build = ":Neorg sync-parsers",
 	load = {
 		["core.defaults"] = {},
 		["core.concealer"] = {
-			config = {
-				icon_preset = "varied",
-			},
+			config = { icon_preset = "varied", },
 		},
 		["core.summary"] = {},
 		["core.ui"] = {},
 		["core.ui.calendar"] = {},
 		["core.integrations.treesitter"] = {
-			config = {
-				configure_parsers = true,
-			},
+			config = { configure_parsers = true, },
 		},
 		["core.journal"] = {
-			config = {
-				strategy = "flat",
-			},
+			config = { strategy = "flat", },
 		},
 		["core.completion"] = {
 			config = {
@@ -70,6 +46,14 @@ require("neorg").setup({
 		},
 		["core.highlights"] = {},
 	},
+})
+
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+  pattern = {"*.norg"},
+  callback = function ()
+    vim.opt.conceallevel = 2
+    vim.opt.concealcursor = 'nc'
+  end
 })
 
 vim.keymap.set("n", "<leader>oi", "<cmd>Neorg index<CR>", { desc = "Neorg: Open index" })
