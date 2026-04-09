@@ -29,7 +29,7 @@
       "src": "https://github.com/hrsh7th/cmp-vsnip"
     },
     "gitsigns.nvim": {
-      "rev": "f2ce545601fdeb755e91470b25a55705639586a4",
+      "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lua-utils.nvim": {
@@ -37,20 +37,15 @@
       "src": "https://github.com/nvim-neorg/lua-utils.nvim"
     },
     "lualine.nvim": {
-      "rev": "8811f3f3f4dc09d740c67e9ce399e7a541e2e5b2",
+      "rev": "f5d2a8570f8b736ddb9bb4be504355bcd6e15ec8",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
     "luarocks.nvim": {
       "rev": "1db9093915eb16ba2473cfb8d343ace5ee04130a",
       "src": "https://github.com/vhyrro/luarocks.nvim"
     },
-    "neo-tree.nvim": {
-      "rev": "b48ed11632c8208ffb27dab6acfbf16e4f9e3376",
-      "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",
-      "version": "3.0.0 - 4.0.0"
-    },
     "neorg": {
-      "rev": "3ae578230db4defd185547bb86b1224a580618f1",
+      "rev": "aeca7d192742c459af82e1f2ec2824c868fd1e8f",
       "src": "https://github.com/nvim-neorg/neorg"
     },
     "nui.nvim": {
@@ -71,7 +66,7 @@
       "version": "'master'"
     },
     "nvim-web-devicons": {
-      "rev": "40e9d5a6cc3db11b309e39593fc7ac03bb844e38",
+      "rev": "6e76c5e47e957fbf080b1fdac165c66dbd2e7cfb",
       "src": "https://github.com/nvim-tree/nvim-web-devicons"
     },
     "pathlib.nvim": {
@@ -83,7 +78,7 @@
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "4ae2f2e8e8c66d070f33cfb57cb6f867e3baf5d9",
+      "rev": "54d4b5431e9634ee3d8d30784e017239b5b89d41",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "telescope-fzf-native.nvim": {
@@ -95,8 +90,12 @@
       "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
     },
     "telescope.nvim": {
-      "rev": "7ef4d6dccb78ee71e552bbd866176762ad328afa",
+      "rev": "48d2656e54d3e3953ae647153ccdaffa50d4d76b",
       "src": "https://github.com/nvim-telescope/telescope.nvim"
+    },
+    "tree-sitter-norg": {
+      "rev": "d89d95af13d409f30a6c7676387bde311ec4a2c8",
+      "src": "https://github.com/nvim-neorg/tree-sitter-norg"
     },
     "twilight.nvim": {
       "rev": "664e752f4a219801265cc3fc18782b457b58c1e1",

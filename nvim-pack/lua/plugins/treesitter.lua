@@ -6,6 +6,8 @@ vim.pack.add({
 })
 
 require("nvim-treesitter.configs").setup({
+	build = ":TSUpdate",
+
 	auto_install = true,
 	ensure_installed = { "lua", "rust", "toml", "markdown", "norg" },
 	highlight = {
@@ -18,5 +20,5 @@ require("nvim-treesitter.configs").setup({
 		enable = true,
 		extended_mode = true,
 		max_file_lines = nil,
-	}
+	},
 })

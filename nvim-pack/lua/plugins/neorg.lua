@@ -4,11 +4,11 @@ vim.pack.add({
 	},
 
 	-- dependencies
+	--"https://github.com/nvim-neorg/tree-sitter-norg",
 	"https://github.com/pysan3/pathlib.nvim",
 	"https://github.com/nvim-neotest/nvim-nio",
 	"https://github.com/nvim-neorg/lua-utils.nvim",
 	"https://github.com/vhyrro/luarocks.nvim",
-	"https://github.com/nvim-lua/plenary.nvim",
 })
 
 require("neorg").setup({
