@@ -2,7 +2,29 @@ vim.lsp.enable({
 	'rust-analyzer'
 })
 
-vim.diagnostic.config({ signs = true })
+vim.diagnostic.config({
+	virtual_text = false,
+	sign = true,
+	update_in_insert = true,
+	underline = true,
+	serverity_sort = false,
+	float = {
+		border = "single",
+		source = "always",
+	},
+})
+
+local sign = function(opts)
+	vim.fn.sign_define(opts.name, {
+		texthl = opts.name,
+		text = opts.text,
+	})
+end
+
+sign({ name = "DiagnosticSignError", text = "" })
+sign({ name = "DiagnosticSignWarn", text = "" })
+sign({ name = "DiagnosticSignHint", text = "⚑" })
+sign({ name = "DiagnosticSignInfo", text = "" })
 
 opts = {}
 vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, opts)
