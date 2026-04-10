@@ -35,8 +35,10 @@ vim.keymap.set('n', '<leader>fo', builtin.vim_options, {})
 vim.keymap.set('n', '<leader>ft', builtin.colorscheme, {})
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 
-vim.keymap.set('n', '<leader>fn', function()
+vim.keymap.set('n', '<leader>fs', function()
 	builtin.find_files {
 		cwd = vim.fn.stdpath("config")
 	}
 end)
+
+vim.keymap.set('n', '<leader>fn', "<cmd>Telescope notify<cr>", {})
