@@ -1,4 +1,5 @@
-vim.g.mapleader = " "
+vim.g.mapleader = vim.keycode("<space>")
+--vim.g.maplocalleader = vim.keycode("<cr>")
 
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", {})
 vim.keymap.set("n", "<leader>b", "<cmd>bprevious<CR>", {})

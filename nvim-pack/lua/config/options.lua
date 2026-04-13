@@ -26,9 +26,12 @@ vim.o.autocomplete = true
 vim.o.pummaxwidth = 40
 vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 
-vim.opt.shortmess:append("c")
+--vim.opt.shortmess:append("c")
 
-vim.api.nvim_set_option("updatetime", 300)
+vim.o.updatetime = 200
+
+vim.o.ignorecase = true
+vim.o.smartcase = true
 
 vim.opt.termguicolors = true
 vim.opt.title = true

@@ -27,7 +27,7 @@ compinit
 #
 if ! [[ "$PATH" =~ "$HOME/.local/bin:" ]]
 then
-    PATH=".:/$HOME/.local/bin:$PATH"
+    PATH=".:/$HOME/.local/bin:/$HOME/.local/share/nvim/mason/bin:$PATH"
 fi
 export PATH
 

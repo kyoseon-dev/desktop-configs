@@ -1,5 +1,6 @@
 vim.lsp.enable({
-	'rust-analyzer'
+	'rust-analyzer',
+	'lua_ls',
 })
 
 vim.diagnostic.config({
@@ -27,10 +28,12 @@ sign({ name = "DiagnosticSignHint", text = "⚑" })
 sign({ name = "DiagnosticSignInfo", text = "" })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+	group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
 	callback = function(ev)
 		-- Enable completion triggered by <c-x><c-o>
 		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
+
+		vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { auto_trigger = true, })
 
 		-- Buffer local mappings.
 		local opts = { buffer = ev.buf }
