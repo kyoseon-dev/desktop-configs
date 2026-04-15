@@ -1,6 +1,9 @@
 vim.pack.add({
   { src = 'https://github.com/nvim-orgmode/orgmode', },
-  { src = 'https://github.com/chipsenkbeil/org-roam.nvim', },
+
+  'https://github.com/chipsenkbeil/org-roam.nvim',
+  'https://github.com/nvim-orgmode/org-bullets.nvim',
+  'https://github.com/lukas-reineke/headlines.nvim',
 })
 
 require('orgmode').setup({
@@ -8,14 +11,20 @@ require('orgmode').setup({
 	org_default_notes_file = '~/Documents/orgfiles/refile.org',
 })
 
-require('org-roam').setup({
-	directory = "~/Documents/orgfiles",
-})
+require('org-bullets').setup({})
+require('headlines').setup({})
+require('org-roam').setup({ directory = "~/Documents/orgfiles", })
 
 -- Experimental LSP support
 vim.lsp.enable('org')
 
---[[
+--[[ orgmode
+<leader>oa  - Open agenda prompt
+<leader>oc  - Open capture prompt
+g?          - Help in any orgmode buffer
+--]]
+
+--[[ org-roam
 <leader>nc  - Opens org-roam capture window.
 <leader>nf  - Finds node and moves to it, creating it if it does not exist.
 <leader>naa - Adds an alias to the node under cursor.
