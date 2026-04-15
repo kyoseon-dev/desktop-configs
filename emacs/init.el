@@ -1,4 +1,5 @@
-(custom-set-variables
+(
+ custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
@@ -6,7 +7,9 @@
  '(custom-enabled-themes '(adwaita))
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
- '(package-selected-packages '(evil evil-numbers evil-surround inkpot-theme ivy undo-fu)))
+ '(package-selected-packages nil))
+
+(add-to-list 'load-path "~/.config/emacs/packages/")
 
 ;; Disable GUI elements.
 (tool-bar-mode -1)
@@ -60,8 +63,10 @@
   (setq evil-undo-system 'undo-fu)
   (setq evil-search-module 'evil-search)
   :config
-  (evil-mode)
+  (evil-mode 1)
   (setq evil-ex-search-case 'sensitive))
+
+(evil-define-key 'normal org-mode-map (kbd "<tab>") #'org-cycle)
 
 (use-package undo-fu)
 (use-package evil-numbers)
@@ -82,9 +87,20 @@
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
   (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
 
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+
+(add-hook 'org-mode-hook 'visual-line-mode)
+(setq org-startup-indented t)
+(setq org-indent-indentation-per-level 2)
+
+;;(require 'org-modern-indent)
+;;(add-hook 'org-mode-hook #'org-mode-indent 90)
+
 ;;
 ;;(global-display-fill-column-indicator-mode 1)
 (global-display-line-numbers-mode 1)
+(setq-default display-line-numbers-width 5)
 (setq display-line-numbers-type 'relative)
 (setq column-number-mode t)
 
