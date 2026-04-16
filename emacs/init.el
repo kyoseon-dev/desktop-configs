@@ -7,7 +7,8 @@
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-	'(dashboard evil-numbers evil-surround inkpot-theme ivy org-superstar undo-fu)))
+	'(dashboard doom-modeline doom-modeline-now-playing evil-numbers evil-surround
+					inkpot-theme ivy org-ibullets org-superstar undo-fu)))
 
 (add-to-list 'load-path "~/.config/emacs/packages/")
 
@@ -15,11 +16,13 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
+(set-fringe-mode 10)
 
 (setq-default tab-stop 3)
 (setq-default tab-width 3)
 (setq-default fill-column 80)
 (global-display-fill-column-indicator-mode 0)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 (setopt x-underline-at-decent-line nil)
 (setq inhibit-compacting-font-caches t)
@@ -38,9 +41,9 @@
 (setq-default frame-title-format "%b %& emacs")
 
 ;; Cursor line
-(global-hl-line-mode 1)
-(set-face-background 'hl-line nil)
-(set-face-foreground 'hl-line nil)
+;;(global-hl-line-mode 1)
+;;(set-face-background 'hl-line nil)
+;;(set-face-foreground 'hl-line nil)
 
 ;; Use UTF-8 everywhere.
 (prefer-coding-system 'utf-8)
@@ -136,7 +139,8 @@
 ;; Dashboard
 (require 'dashboard)
 
-(setq dashboard-startup-banner 'logo-braille)
+(setq dashboard-startup-banner 'logo-ansi-truecolor)
+;;(setq dashboard-startup-banner 'logo-braille)
 (setq dashboard-center-content t)
 (setq dashboard-vertically-center-content t)
 (setq dashboard-show-shortcuts nil)
@@ -156,6 +160,12 @@
 											 dashboard-insert-items))
 
 (dashboard-setup-startup-hook)
+
+;;(use-package doom-modeline
+;;  :ensure t
+;;  :init (doom-modeline-mode 1))
+;;(setq doom-modeline-icon t)
+;;(setq doom-modeline-major-mode-color-icon t)
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
