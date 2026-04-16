@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "456d38d1cd3743926f329204c2340f3e7840aad6",
+      "rev": "37c96dc06032b3f128b230b5fb193706535b3811",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "friendly-snippets": {
@@ -57,7 +57,7 @@
       "src": "https://github.com/chipsenkbeil/org-roam.nvim"
     },
     "orgmode": {
-      "rev": "3fb33c6e2dd90891474f8955711b9e76619392b7",
+      "rev": "a214db3c8ed7eb68cb74924575b91ffc658e7d82",
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "render-markdown.nvim": {

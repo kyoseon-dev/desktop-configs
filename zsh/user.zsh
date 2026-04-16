@@ -42,7 +42,7 @@ export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 export CARGO_HOME=~/.local/share/cargo
 
 alias vi="/ext/kyoseon/nvim-linux-x86_64/bin/nvim"
-alias emacs="emacs -nw"
+alias em="emacs -nw"
 alias cp="cp -i"
 alias mv="mv -i"
 alias rm="rm -i"
