@@ -3,12 +3,11 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-enabled-themes '(adwaita))
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-	'(dashboard doom-modeline doom-modeline-now-playing evil-numbers evil-surround
-					inkpot-theme ivy org-ibullets org-superstar undo-fu)))
+	'(all-the-icons dashboard doom-modeline evil-numbers evil-surround inkpot-theme
+						 ivy org-ibullets restart-emacs undo-fu)))
 
 (setq comp-deferred-compilation t)
 
@@ -39,3 +38,9 @@
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 (put 'list-timers 'disabled nil)
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

@@ -1,3 +1,5 @@
+#+STARTUP: fold
+
 * Preparing for lift-off
 #+BEGIN_SRC emacs-lisp
   (defun nooonso/reload-config ()
@@ -37,7 +39,6 @@
    tab-stop 3
    tab-width 3
    fill-column 80
-   indent-tabs-mode nil   ; do not insert tabs when indenting by default
    display-line-numbers-width 5
    display-line-numbers-type 'relative)
 
@@ -61,8 +62,21 @@
 * Theme
 #+BEGIN_SRC emacs-lisp
   (use-package inkpot-theme
-    :demand t
-    :config (load-theme 'inkpot t))
+   :demand t
+   :config (load-theme 'inkpot t))
+  (setq
+   inkpot-theme-use-box t
+   inkpot-theme-use-black-background t)
+#+END_SRC
+
+* Modeline
+#+BEGIN_SRC emacs-lisp
+  (require 'doom-modeline)
+  (doom-modeline-mode 1)
+
+  (setq
+   doom-modeline-buffer-file-name-style 'file-name
+   doom-modeline-major-mode-color-icon t)
 #+END_SRC
 
 * Evil
@@ -99,8 +113,13 @@
 #+BEGIN_SRC emacs-lisp
   (require 'org-ibullets)
 
-  ;; Org-mode face setting
-  (setq org-hidden-keywords '(title))
+  (setq org-hidden-keywords '(title)
+        org-cycle-level-faces nil
+        org-n-level-faces 4
+        org-startup-indented t
+        org-indent-indentation-per-level 2)
+
+  ; Org-mode face setting
   (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
   (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
   (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
@@ -109,17 +128,12 @@
   (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
   (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.23)
   (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.38)
-  (setq org-cycle-level-faces nil)
-  (setq org-n-level-faces 4)
   (set-face-attribute 'org-document-title nil
-  						  :height 2.074
+  						  :height 1.7
   						  :foreground 'unspecified
   						  :inherit 'org-level-8)
 
   (add-hook 'org-mode-hook (lambda () (org-ibullets-mode 1)))
-
-  (setq org-startup-indented t)
-  (setq org-indent-indentation-per-level 2)
   (add-hook 'org-mode-hook 'visual-line-mode)
 #+END_SRC
 
@@ -128,7 +142,6 @@
   (require 'dashboard)
 
   (setq dashboard-startup-banner 'logo-ansi-truecolor)
-  ;;(setq dashboard-startup-banner 'logo-braille)
   (setq dashboard-center-content t)
   (setq dashboard-vertically-center-content t)
   (setq dashboard-show-shortcuts nil)
@@ -155,3 +168,4 @@
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 #+END_SRC
+** TODO map "<c-tab>" to "<c-w><c-w>"
