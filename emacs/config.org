@@ -75,7 +75,11 @@
   (doom-modeline-mode 1)
 
   (setq
+   ;doom-modeline-height 25
+   doom-modeline-bar-width 1
    doom-modeline-buffer-file-name-style 'file-name
+   doom-modeline-icon t
+   doom-modeline-major-mode-icon t
    doom-modeline-major-mode-color-icon t)
 #+END_SRC
 
@@ -111,7 +115,7 @@
 
 * Org mode
 #+BEGIN_SRC emacs-lisp
-  (require 'org-ibullets)
+  (require 'org-modern)
 
   (setq org-hidden-keywords '(title)
         org-cycle-level-faces nil
@@ -133,7 +137,7 @@
   						  :foreground 'unspecified
   						  :inherit 'org-level-8)
 
-  (add-hook 'org-mode-hook (lambda () (org-ibullets-mode 1)))
+  (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
 #+END_SRC
 

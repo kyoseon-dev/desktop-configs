@@ -7,16 +7,11 @@
  '(inhibit-startup-screen t)
  '(package-selected-packages
 	'(all-the-icons dashboard doom-modeline evil-numbers evil-surround inkpot-theme
-						 ivy org-ibullets restart-emacs undo-fu)))
+						 ivy org-modern restart-emacs undo-fu)))
 
 (setq comp-deferred-compilation t)
 
 (add-to-list 'load-path "~/.config/emacs/packages/")
-
-;; Packages
-(with-eval-after-load 'package
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 
 (package-initialize)
 
