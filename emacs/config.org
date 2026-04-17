@@ -58,12 +58,6 @@
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
 
-* Key bindings
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
-#+END_SRC
-
 * Theme
 #+BEGIN_SRC emacs-lisp
   (use-package inkpot-theme
@@ -154,4 +148,10 @@
   											 dashboard-insert-items))
 
   (dashboard-setup-startup-hook)
+#+END_SRC
+
+* Key bindings
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 #+END_SRC
