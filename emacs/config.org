@@ -1,0 +1,158 @@
+* Preparing for lift-off
+#+BEGIN_SRC emacs-lisp
+  (defun nooonso/reload-config ()
+   "Reload init file, which will effectively reload everything"
+   (interactive)
+   (load-file (expand-file-name "init.el" user-emacs-directory)))
+
+  (tool-bar-mode -1)
+  (menu-bar-mode -1)
+  (scroll-bar-mode -1)
+  (setq-default frame-title-format "%b %&")
+  (defun display-startup-echo-area-message () (message "")) ; Disable startup message.
+#+END_SRC
+
+* Global Generic Settings
+#+BEGIN_SRC emacs-lisp
+  (setq
+   visible-bell 0
+   select-enable-clipboard t ; use the clipboard in addition to kill-ring
+   display-warning-minimum-level 'error
+   large-file-warning-threshold nil
+   find-file-use-truenames nil
+   find-file-compare-truenames t
+
+   minibuffer-max-depth nil
+   minibuffer-confirm-incomplete t
+   complex-buffers-menu-p t
+   next-line-add-newlines nil
+   kill-whole-line t
+   comp-deferred-compilation t
+   inhibit-compacting-font-caches t
+   backup-inhibited 1
+   auto-save-default nil
+   shift-select-mode t)
+
+  (setq-default
+   tab-stop 3
+   tab-width 3
+   fill-column 80
+   indent-tabs-mode nil   ; do not insert tabs when indenting by default
+   display-line-numbers-width 5
+   display-line-numbers-type 'relative)
+
+  (setopt
+   x-underline-at-decent-line nil)
+
+  (set-fringe-mode 10)
+  (global-display-fill-column-indicator-mode 0)
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-display-line-numbers-mode 1)
+
+  ; Cursor line
+  ;(global-hl-line-mode 1)
+  ;(set-face-background 'hl-line nil)
+  ;(set-face-foreground 'hl-line nil)
+
+  (prefer-coding-system 'utf-8) ; Use UTF-8 everywhere.
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  (add-hook 'text-mode-hook 'visual-line-mode)
+#+END_SRC
+
+* Key bindings
+#+BEGIN_SRC emacs-lisp
+#+END_SRC
+
+* Theme
+#+BEGIN_SRC emacs-lisp
+  (use-package inkpot-theme
+    :demand t
+    :config (load-theme 'inkpot t))
+#+END_SRC
+
+* Evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+    :demand t
+    :init
+    (setq evil-undo-system 'undo-fu)
+    (setq evil-search-module 'evil-search)
+    :config
+    (evil-mode 1)
+    (setq evil-ex-search-case 'sensitive))
+
+  (use-package undo-fu)
+  (use-package evil-numbers)
+  (use-package evil-surround
+    :demand t
+    :config
+    (global-evil-surround-mode 1))
+#+END_SRC
+
+* Ivy
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :demand t
+    :config (ivy-mode)
+
+    (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
+    (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
+    (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
+#+END_SRC
+
+* Org mode
+#+BEGIN_SRC emacs-lisp
+  (require 'org-ibullets)
+
+  (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
+
+  ;; Org-mode face setting
+  (setq org-hidden-keywords '(title))
+  (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
+  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
+  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
+  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.23)
+  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.38)
+  (setq org-cycle-level-faces nil)
+  (setq org-n-level-faces 4)
+  (set-face-attribute 'org-document-title nil
+  						  :height 2.074
+  						  :foreground 'unspecified
+  						  :inherit 'org-level-8)
+
+  (add-hook 'org-mode-hook (lambda () (org-ibullets-mode 1)))
+
+  (setq org-startup-indented t)
+  (setq org-indent-indentation-per-level 2)
+  (add-hook 'org-mode-hook 'visual-line-mode)
+#+END_SRC
+
+* Dashboard
+#+BEGIN_SRC emacs-lisp
+  (require 'dashboard)
+
+  (setq dashboard-startup-banner 'logo-ansi-truecolor)
+  ;;(setq dashboard-startup-banner 'logo-braille)
+  (setq dashboard-center-content t)
+  (setq dashboard-vertically-center-content t)
+  (setq dashboard-show-shortcuts nil)
+  (setq dashboard-display-icons-p t)
+  (setq dashboard-icon-type 'all-the-icons)
+  (setq dashboard-items '((recents   . 5)
+  								(bookmarks . 5)
+  								(projects  . 5)
+  								(agenda    . 5)
+  								(registers . 5)))
+
+  (setq dashboard-startupify-list '(dashboard-insert-banner
+  											 dashboard-insert-newline
+  											 dashboard-insert-navigator
+  											 dashboard-insert-newline
+  											 dashboard-insert-init-info
+  											 dashboard-insert-items))
+
+  (dashboard-setup-startup-hook)
+#+END_SRC
