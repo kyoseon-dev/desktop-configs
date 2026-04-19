@@ -16,25 +16,7 @@
 #+END_SRC
 
 * Global Generic Settings
-** Line numbers
-#+begin_src emacs-lisp
-  (global-display-line-numbers-mode 1)
-
-  (setq-default
-   display-line-numbers-width 5
-   display-line-numbers-type 'relative)
-
-  ; Disable line numbers for some modes
-  (dolist
-  	 (mode '(term-mode-hook
-              shell-mode-hook
-              eshell-mode-hook))
-  	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
-#+end_src
-
-#+RESULTS:
-
-** Misc
+** Options
 #+BEGIN_SRC emacs-lisp
   (setq
    visible-bell 0
@@ -58,11 +40,35 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
+** Key bindings
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+#+END_SRC
+*** TODO map "<c-tab>" to "<c-w><c-w>"
+** Line numbers
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode 1)
+
+  (setq-default
+   display-line-numbers-width 5
+   display-line-numbers-type 'relative)
+
+  ; Disable line numbers for some modes
+  (dolist
+  	 (mode '(term-mode-hook
+              shell-mode-hook
+              eshell-mode-hook))
+  	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+#+RESULTS:
+
 * Theme
 #+BEGIN_SRC emacs-lisp
   (use-package inkpot-theme
    :demand t
    :config (load-theme 'inkpot t))
+
   (setq
    inkpot-theme-use-box t
    inkpot-theme-use-black-background t)
@@ -129,45 +135,44 @@
    org-startup-indented t
    org-indent-indentation-per-level 2)
 
-  ; Org-mode face setting
+  ; Face setting
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.38))))
    '(org-level-2 ((t (:inherit outline-2 :height 1.23))))
    '(org-level-3 ((t (:inherit outline-3 :height 1.1 ))))
    '(org-document-title ((t (:inherit outline-1 :height 1.6 ))))
   )
+  (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 #+END_SRC
 
 * Dashboard
 #+BEGIN_SRC emacs-lisp
   (require 'dashboard)
 
-  (setq dashboard-startup-banner 'logo-ansi-truecolor)
-  (setq dashboard-center-content t)
-  (setq dashboard-vertically-center-content t)
-  (setq dashboard-show-shortcuts nil)
-  (setq dashboard-display-icons-p t)
-  (setq dashboard-icon-type 'all-the-icons)
-  (setq dashboard-items '((recents   . 5)
-  								(bookmarks . 5)
-  								(projects  . 5)
-  								(agenda    . 5)
-  								(registers . 5)))
+  (setq
+   dashboard-startup-banner 'logo-ansi-truecolor
+   dashboard-center-content t
+   dashboard-vertically-center-content t
+   dashboard-show-shortcuts nil
+   dashboard-display-icons-p t
+   dashboard-icon-type 'all-the-icons
 
-  (setq dashboard-startupify-list '(dashboard-insert-banner
-  											 dashboard-insert-newline
-  											 dashboard-insert-navigator
-  											 dashboard-insert-newline
-  											 dashboard-insert-init-info
-  											 dashboard-insert-items))
+   dashboard-items
+  	  '((recents   . 5)
+         (bookmarks . 5)
+         (projects  . 5)
+         (agenda    . 5)
+         (registers . 5))
+
+   dashboard-startupify-list
+  	  '(dashboard-insert-banner
+         dashboard-insert-newline
+         dashboard-insert-navigator
+         dashboard-insert-newline
+         dashboard-insert-init-info
+         dashboard-insert-items)
+  )
 
   (dashboard-setup-startup-hook)
-  (add-hook 'dashboard-mode-hook (display-line-numbers-mode 0))
 #+END_SRC
 
-* Key bindings
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
-#+END_SRC
-** TODO map "<c-tab>" to "<c-w><c-w>"
