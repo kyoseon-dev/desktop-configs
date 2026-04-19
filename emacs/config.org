@@ -1,3 +1,4 @@
+#+TITLE:NOOONSO emacs config
 #+STARTUP: fold
 
 * Preparing for lift-off
@@ -15,50 +16,48 @@
 #+END_SRC
 
 * Global Generic Settings
+** Line numbers
+#+begin_src emacs-lisp
+  (global-display-line-numbers-mode 1)
+
+  (setq-default
+   display-line-numbers-width 5
+   display-line-numbers-type 'relative)
+
+  ; Disable line numbers for some modes
+  (dolist
+  	 (mode '(term-mode-hook
+              shell-mode-hook
+              eshell-mode-hook))
+  	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
+#+end_src
+
+#+RESULTS:
+
+** Misc
 #+BEGIN_SRC emacs-lisp
   (setq
    visible-bell 0
    select-enable-clipboard t ; use the clipboard in addition to kill-ring
-   display-warning-minimum-level 'error
    large-file-warning-threshold nil
-   find-file-use-truenames nil
-   find-file-compare-truenames t
 
-   minibuffer-max-depth nil
-   minibuffer-confirm-incomplete t
-   complex-buffers-menu-p t
-   next-line-add-newlines nil
-   kill-whole-line t
    comp-deferred-compilation t
    inhibit-compacting-font-caches t
    backup-inhibited 1
-   auto-save-default nil
-   shift-select-mode t)
+   auto-save-default nil)
 
   (setq-default
    tab-stop 3
    tab-width 3
-   fill-column 80
-   display-line-numbers-width 5
-   display-line-numbers-type 'relative)
-
-  (setopt
-   x-underline-at-decent-line nil)
+   fill-column 80)
 
   (set-fringe-mode 10)
   (global-display-fill-column-indicator-mode 0)
-  (global-display-line-numbers-mode 1)
-
-  ; Cursor line
-  ;(global-hl-line-mode 1)
-  ;(set-face-background 'hl-line nil)
-  ;(set-face-foreground 'hl-line nil)
-
+       
   (prefer-coding-system 'utf-8) ; Use UTF-8 everywhere.
   (defalias 'yes-or-no-p 'y-or-n-p)
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
-
 * Theme
 #+BEGIN_SRC emacs-lisp
   (use-package inkpot-theme
@@ -86,20 +85,20 @@
 * Evil
 #+BEGIN_SRC emacs-lisp
   (use-package evil
-    :demand t
-    :init
-    (setq evil-undo-system 'undo-fu)
-    (setq evil-search-module 'evil-search)
-    :config
-    (evil-mode 1)
-    (setq evil-ex-search-case 'sensitive))
+   :demand t
+   :init
+   (setq evil-undo-system 'undo-fu)
+   (setq evil-search-module 'evil-search)
+   :config
+   (evil-mode 1)
+   (setq evil-ex-search-case 'sensitive))
 
   (use-package undo-fu)
   (use-package evil-numbers)
   (use-package evil-surround
-    :demand t
-    :config
-    (global-evil-surround-mode 1))
+   :demand t
+   :config
+   (global-evil-surround-mode 1))
 #+END_SRC
 
 * Ivy
@@ -111,34 +110,32 @@
     (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
     (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
     (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
+
+  ;(use-package ivy-rich
+  ;  :init
+  ;  (ivy-rich-mode 1))
 #+END_SRC
 
 * Org mode
 #+BEGIN_SRC emacs-lisp
   (require 'org-modern)
-
-  (setq org-hidden-keywords '(title)
-        org-cycle-level-faces nil
-        org-n-level-faces 4
-        org-startup-indented t
-        org-indent-indentation-per-level 2)
-
-  ; Org-mode face setting
-  (set-face-attribute 'org-level-8 nil :weight 'bold :inherit 'default)
-  (set-face-attribute 'org-level-7 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-6 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-5 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-4 nil :inherit 'org-level-8)
-  (set-face-attribute 'org-level-3 nil :inherit 'org-level-8 :height 1.1)
-  (set-face-attribute 'org-level-2 nil :inherit 'org-level-8 :height 1.23)
-  (set-face-attribute 'org-level-1 nil :inherit 'org-level-8 :height 1.38)
-  (set-face-attribute 'org-document-title nil
-  						  :height 1.7
-  						  :foreground 'unspecified
-  						  :inherit 'org-level-8)
-
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-mode-hook 'visual-line-mode)
+
+  (setq
+   org-hidden-keywords '(title)
+   org-cycle-level-faces nil
+   org-n-level-faces 4
+   org-startup-indented t
+   org-indent-indentation-per-level 2)
+
+  ; Org-mode face setting
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.38))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.23))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.1 ))))
+   '(org-document-title ((t (:inherit outline-1 :height 1.6 ))))
+  )
 #+END_SRC
 
 * Dashboard
@@ -165,6 +162,7 @@
   											 dashboard-insert-items))
 
   (dashboard-setup-startup-hook)
+  (add-hook 'dashboard-mode-hook (display-line-numbers-mode 0))
 #+END_SRC
 
 * Key bindings
