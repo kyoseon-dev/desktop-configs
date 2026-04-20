@@ -43,8 +43,8 @@
 ** Key bindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+  (global-set-key (kbd "C-<tab>") #'other-window)
 #+END_SRC
-*** TODO map "<c-tab>" to "<c-w><c-w>"
 ** Line numbers
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode 1)
@@ -57,6 +57,7 @@
   (dolist
   	 (mode '(term-mode-hook
               shell-mode-hook
+              org-agenda-mode-hook
               eshell-mode-hook))
   	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
@@ -76,16 +77,16 @@
 
 * Modeline
 #+BEGIN_SRC emacs-lisp
-  (require 'doom-modeline)
-  (doom-modeline-mode 1)
+  ;(require 'doom-modeline)
+  ;(doom-modeline-mode 1)
 
-  (setq
-   ;doom-modeline-height 25
-   doom-modeline-bar-width 1
-   doom-modeline-buffer-file-name-style 'file-name
-   doom-modeline-icon t
-   doom-modeline-major-mode-icon t
-   doom-modeline-major-mode-color-icon t)
+  ;(setq
+  ; ;doom-modeline-height 25
+  ; doom-modeline-bar-width 1
+  ; doom-modeline-buffer-file-name-style 'file-name
+  ; doom-modeline-icon t
+  ; doom-modeline-major-mode-icon t
+  ; doom-modeline-major-mode-color-icon t)
 #+END_SRC
 
 * Evil
@@ -133,15 +134,25 @@
    org-cycle-level-faces nil
    org-n-level-faces 4
    org-startup-indented t
-   org-indent-indentation-per-level 2)
+   org-indent-indentation-per-level 2
+
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?-
+   org-agenda-time-grid
+   '((daily today require-timed)
+  	    (800 100 1200 1400 1600 1800 2000)
+  		 " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
 
   ; Face setting
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :height 1.38))))
    '(org-level-2 ((t (:inherit outline-2 :height 1.23))))
    '(org-level-3 ((t (:inherit outline-3 :height 1.1 ))))
-   '(org-document-title ((t (:inherit outline-1 :height 1.6 ))))
-  )
+   '(org-document-title ((t (:inherit outline-1 :height 1.6 )))))
+
+  (global-org-modern-mode)
   (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 #+END_SRC
 
@@ -154,8 +165,6 @@
    dashboard-center-content t
    dashboard-vertically-center-content t
    dashboard-show-shortcuts nil
-   dashboard-display-icons-p t
-   dashboard-icon-type 'all-the-icons
 
    dashboard-items
   	  '((recents   . 5)
