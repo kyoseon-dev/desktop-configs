@@ -1,10 +1,11 @@
+.org-id-locations
 auto-save-list
 bookmarks
 config.el
 eln-cache
 elpa
+eshell
 recentf
+tramp
 transient
 tutorial
-eshell
-.org-id-locations

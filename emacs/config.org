@@ -74,7 +74,7 @@
 
   ; org-mode
   (evil-define-key 'normal 'org-mode-map (kbd "TAB") 'org-cycle)
-  (evil-define-key 'normal 'org-mode-map (kbd "<leader>aa") 'org-agenda)
+  (evil-define-key 'normal 'org-mode-map (kbd "<leader>ca") 'org-agenda)
 #+END_SRC
 
 ** Line numbers
@@ -148,6 +148,7 @@
   (add-hook 'org-mode-hook 'visual-line-mode)
 
   (setq
+   org-log-into-drawer t
    org-hidden-keywords '(title)
    org-cycle-level-faces nil
    org-n-level-faces 4
