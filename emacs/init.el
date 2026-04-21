@@ -5,13 +5,12 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
- '(package-selected-packages
-	'(all-the-icons dashboard "doom-modeline" evil-numbers evil-surround
-						 inkpot-theme ivy org-modern undo-fu)))
+ '(org-agenda-files '("~/tmp/org-mode/06-tags.org"))
+ '(package-selected-packages nil))
 
 (setq comp-deferred-compilation t)
 
-(add-to-list 'load-path "~/.config/emacs/packages/")
+(add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
 
 (package-initialize)
 

@@ -1,7 +1,7 @@
 {
   "plugins": {
     "blink.cmp": {
-      "rev": "c573a15a62bd0bfd4006ee0849b24f5404395500",
+      "rev": "90d14caca4ae557665ab105080c27d5f289a2e30",
       "src": "https://github.com/saghen/blink.cmp"
     },
     "friendly-snippets": {
@@ -9,7 +9,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "gitsigns.nvim": {
-      "rev": "8d82c240f190fc33723d48c308ccc1ed8baad69d",
+      "rev": "6d808f99bd63303646794406e270bd553ad7792e",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "headlines.nvim": {
@@ -61,7 +61,7 @@
       "src": "https://github.com/nvim-orgmode/orgmode"
     },
     "render-markdown.nvim": {
-      "rev": "0fd43fb4b1f073931c4b481f5f3b7cea3749e190",
+      "rev": "d67113f11384c0dad96fced2f7b91f1fc811e97f",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "snacks.nvim": {
@@ -69,7 +69,7 @@
       "src": "https://github.com/folke/snacks.nvim"
     },
     "tree-sitter-manager.nvim": {
-      "rev": "fa63bc63ae08b661843d9976a43becfbd3daf76c",
+      "rev": "540c6dc18bdb470fe8b1aab58898d2fa06bc4185",
       "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "twilight.nvim": {

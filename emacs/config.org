@@ -62,7 +62,12 @@
   	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
-#+RESULTS:
+* Git
+#+begin_src emacs-lisp
+  (require 'git-gutter)
+  (global-git-gutter-mode t)
+  (custom-set-variables '(git-gutter:update-interval 0.03))
+#+end_src
 
 * Theme
 #+BEGIN_SRC emacs-lisp
@@ -135,6 +140,7 @@
    org-n-level-faces 4
    org-startup-indented t
    org-indent-indentation-per-level 2
+   org-tags-column 0
 
    org-agenda-tags-column 0
    org-agenda-block-separator ?-

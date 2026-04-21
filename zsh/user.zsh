@@ -33,7 +33,7 @@ export PATH
 
 export KEYTIMEOUT=1
 export GPG_TTY=$(tty)
-export EDITOR=nvim
+export EDITOR="emacs -nw"
 export PYTHONPATH=.
 
 export PASSWORD_STORE_DIR=~/.local/share/.password-store
