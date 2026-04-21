@@ -15,6 +15,27 @@
   (defun display-startup-echo-area-message () (message "")) ; Disable startup message.
 #+END_SRC
 
+* Evil
+#+BEGIN_SRC emacs-lisp
+  (use-package evil
+   :demand t
+   :init
+   (setq evil-undo-system 'undo-fu)
+   (setq evil-search-module 'evil-search)
+   :config
+   (evil-mode 1)
+   (setq evil-ex-search-case 'sensitive))
+
+  (use-package undo-fu)
+  (use-package evil-numbers)
+  (use-package evil-surround
+   :demand t
+   :config
+   (global-evil-surround-mode 1))
+
+  (evil-set-leader 'normal (kbd "<SPC>") nil)
+#+END_SRC
+
 * Global Generic Settings
 ** Options
 #+BEGIN_SRC emacs-lisp
@@ -40,11 +61,22 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
   (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
+
 ** Key bindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-<tab>") #'other-window)
+
+  (evil-define-key 'normal 'global (kbd "<leader>d") 'dired)
+  (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>s") 'save-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>k") 'kill-buffer)
+
+  ; org-mode
+  (evil-define-key 'normal 'org-mode-map (kbd "TAB") 'org-cycle)
+  (evil-define-key 'normal 'org-mode-map (kbd "<leader>aa") 'org-agenda)
 #+END_SRC
+
 ** Line numbers
 #+begin_src emacs-lisp
   (global-display-line-numbers-mode 1)
@@ -94,25 +126,6 @@
   ; doom-modeline-major-mode-color-icon t)
 #+END_SRC
 
-* Evil
-#+BEGIN_SRC emacs-lisp
-  (use-package evil
-   :demand t
-   :init
-   (setq evil-undo-system 'undo-fu)
-   (setq evil-search-module 'evil-search)
-   :config
-   (evil-mode 1)
-   (setq evil-ex-search-case 'sensitive))
-
-  (use-package undo-fu)
-  (use-package evil-numbers)
-  (use-package evil-surround
-   :demand t
-   :config
-   (global-evil-surround-mode 1))
-#+END_SRC
-
 * Ivy
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
@@ -128,7 +141,7 @@
   ;  (ivy-rich-mode 1))
 #+END_SRC
 
-* Org mode
+* Org-mode beautify
 #+BEGIN_SRC emacs-lisp
   (require 'org-modern)
   (add-hook 'org-mode-hook #'org-modern-mode)
@@ -159,7 +172,6 @@
    '(org-document-title ((t (:inherit outline-1 :weight bold :height 1.8)))))
 
   (global-org-modern-mode)
-  (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
 #+END_SRC
 
 * Dashboard
