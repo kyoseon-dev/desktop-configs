@@ -153,10 +153,10 @@
 
   ; Face setting
   (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.38))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.23))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.1 ))))
-   '(org-document-title ((t (:inherit outline-1 :height 1.6 )))))
+   '(org-level-1 ((t (:inherit outline-1 :foreground "#8b8bde" :height 1.38))))
+   '(org-level-2 ((t (:inherit outline-2 :foreground "#abbeef" :height 1.23))))
+   '(org-level-3 ((t (:inherit outline-3 :foreground "#adcbed" :height 1.10))))
+   '(org-document-title ((t (:inherit outline-1 :weight bold :height 1.8)))))
 
   (global-org-modern-mode)
   (evil-define-key 'normal org-mode-map (kbd "TAB") 'org-cycle)
