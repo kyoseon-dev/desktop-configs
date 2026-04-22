@@ -5,7 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
- '(org-agenda-files '("~/tmp/org-mode/06-tags.org"))
  '(package-selected-packages nil))
 
 (setq comp-deferred-compilation t)

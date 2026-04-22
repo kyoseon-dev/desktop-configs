@@ -60,7 +60,6 @@
        
   (prefer-coding-system 'utf-8) ; Use UTF-8 everywhere.
   (defalias 'yes-or-no-p 'y-or-n-p)
-  (add-hook 'text-mode-hook 'visual-line-mode)
 #+END_SRC
 
 ** Key bindings
@@ -72,10 +71,13 @@
   (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>s") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>k") 'kill-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>t") 'olivetti-mode)
 
   ; org-mode
   (evil-define-key 'normal 'org-mode-map (kbd "TAB") 'org-cycle)
+  (evil-define-key 'normal 'org-mode-map (kbd "<leader>cl") 'org-store-link)
   (evil-define-key 'normal 'org-mode-map (kbd "<leader>ca") 'org-agenda)
+  (evil-define-key 'normal 'org-mode-map (kbd "<leader>cc") 'org-capture)
 #+END_SRC
 
 ** Line numbers
@@ -90,10 +92,16 @@
   (dolist
   	 (mode '(term-mode-hook
               shell-mode-hook
+              help-mode-hook
               org-agenda-mode-hook
               eshell-mode-hook))
   	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
+
+** Misc
+#+BEGIN_SRC emacs-lisp
+  (require 'olivetti)
+#+END_SRC
 
 * Git
 #+begin_src emacs-lisp
@@ -145,6 +153,10 @@
   (add-hook 'org-mode-hook #'org-modern-mode)
   (global-org-modern-mode)
 
+  (add-hook 'org-mode-hook 'org-indent-mode)
+  (add-hook 'org-mode-hook 'olivetti-mode)
+  (add-hook 'org-agenda-mode-hook 'olivetti-mode)
+
   ; Face setting
   (custom-set-faces
    '(org-level-1 ((t (:inherit outline-1 :foreground "#8b8bde" :height 1.38))))
@@ -155,12 +167,17 @@
   (setq
    org-log-into-drawer t
    org-hidden-keywords '(title)
+   org-hide-emphasis-markers t ; Hide the italic/bold... markers
    org-cycle-level-faces nil
    org-n-level-faces 4
    org-startup-indented t
    org-indent-indentation-per-level 2
    org-tags-column 0
+   org-return-follows-link  t ; Follow the links
+   org-log-done 'time
+   org-log-reschedule t
 
+   org-agenda-files '("~/Documents/orgfiles/")
    org-agenda-restore-windows-after-quit t
    org-agenda-window-setup 'current-window
    org-agenda-tags-column 0
