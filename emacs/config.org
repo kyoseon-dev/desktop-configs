@@ -133,13 +133,10 @@
     :demand t
     :config (ivy-mode)
 
-    (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
-    (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
-    (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
+  (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
 
-  ;(use-package ivy-rich
-  ;  :init
-  ;  (ivy-rich-mode 1))
+  (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
+  (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
 #+END_SRC
 
 * Org-mode
