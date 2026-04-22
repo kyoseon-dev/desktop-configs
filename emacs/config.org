@@ -99,7 +99,7 @@
 #+begin_src emacs-lisp
   (require 'git-gutter)
   (global-git-gutter-mode t)
-  (custom-set-variables '(git-gutter:update-interval 0.03))
+  (git-gutter:update-interval 0.03)
 #+end_src
 
 * Theme
