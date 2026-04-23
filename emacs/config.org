@@ -123,16 +123,11 @@
 
 * Modeline
 #+BEGIN_SRC emacs-lisp
-  ;(require 'doom-modeline)
-  ;(doom-modeline-mode 1)
-
-  ;(setq
-  ; ;doom-modeline-height 25
-  ; doom-modeline-bar-width 1
-  ; doom-modeline-buffer-file-name-style 'file-name
-  ; doom-modeline-icon t
-  ; doom-modeline-major-mode-icon t
-  ; doom-modeline-major-mode-color-icon t)
+  (set-face-attribute 'mode-line nil
+  						  :foreground "#292929"
+  						  :background "#d3d3d3"
+  						  ;:box
+  						  )
 #+END_SRC
 
 * Ivy
