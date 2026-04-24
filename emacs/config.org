@@ -66,6 +66,8 @@
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-<tab>") #'other-window)
+  (global-set-key (kbd "<f5>") 'org-agenda)
+  (global-set-key (kbd "<f6>") 'org-capture)
 
   (evil-define-key 'normal 'global (kbd "<leader>d") 'dired)
   (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
@@ -76,8 +78,6 @@
   ; org-mode
   (evil-define-key 'normal 'org-mode-map (kbd "TAB") 'org-cycle)
   (evil-define-key 'normal 'org-mode-map (kbd "<leader>cl") 'org-store-link)
-  (evil-define-key 'normal 'org-mode-map (kbd "<leader>ca") 'org-agenda)
-  (evil-define-key 'normal 'org-mode-map (kbd "<leader>cc") 'org-capture)
 #+END_SRC
 
 ** Line numbers
@@ -143,6 +143,7 @@
 #+END_SRC
 
 * Org-mode
+** Generic settings
 #+BEGIN_SRC emacs-lisp
   (require 'org-modern)
   (add-hook 'org-mode-hook #'org-modern-mode)
@@ -157,7 +158,7 @@
    '(org-level-1 ((t (:inherit outline-1 :foreground "#8b8bde" :height 1.38))))
    '(org-level-2 ((t (:inherit outline-2 :foreground "#abbeef" :height 1.23))))
    '(org-level-3 ((t (:inherit outline-3 :foreground "#adcbed" :height 1.10))))
-   '(org-document-title ((t (:inherit outline-1 :weight bold :height 1.8)))))
+   '(org-document-title ((t (:inherit outline-1 :foreground "#cdcdcd" :weight bold :height 1.8)))))
 
   (setq
    org-log-into-drawer t
@@ -183,6 +184,17 @@
   		 " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
    org-agenda-current-time-string
    "⭠ now ─────────────────────────────────────────────────")
+#+END_SRC
+
+** Org-capture
+#+BEGIN_SRC emacs-lisp
+  (custom-set-variables
+   '(org-capture-templates
+     '(("p" "Private templates")
+       ("pt" "TODO Entry" entry
+        (file+headline "~/Documents/orgfiles/notes.org" "CAPTURE")
+        (file "~/.config/emacs/tpl/todo.txt")
+  	   :empty-lines-before 1))))
 #+END_SRC
 
 * Dashboard
