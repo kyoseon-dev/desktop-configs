@@ -66,6 +66,8 @@
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-<tab>") #'other-window)
+  (global-set-key (kbd "<f3>") 'olivetti-mode)
+  (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
   (global-set-key (kbd "<f5>") 'org-agenda)
   (global-set-key (kbd "<f6>") 'org-capture)
 
@@ -73,7 +75,6 @@
   (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>s") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>k") 'kill-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>t") 'olivetti-mode)
 
   ; org-mode
   (evil-define-key 'normal 'org-mode-map (kbd "TAB") 'org-cycle)
@@ -177,7 +178,7 @@
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
   (setq
-   org-agenda-files '("~/Documents/orgfiles/")
+   org-agenda-files '("~/Documents/orgfiles/agenda/")
    org-agenda-restore-windows-after-quit t
    org-agenda-window-setup 'current-window
    org-agenda-tags-column 0
@@ -196,13 +197,14 @@
    '(org-capture-templates
      '(("p" "Private templates")
        ("pt" "TODO Entry" entry
-        (file+headline "~/Documents/orgfiles/notes.org" "CAPTURE")
+        (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
         (file "~/.config/emacs/tpl/todo.txt")
   	   :empty-lines-before 1))))
 #+END_SRC
 
 * Dashboard
 #+BEGIN_SRC emacs-lisp
+  [ ; currently disabled
   (require 'dashboard)
 
   (setq
@@ -228,5 +230,6 @@
   )
 
   (dashboard-setup-startup-hook)
+  ]
 #+END_SRC
 
