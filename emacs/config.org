@@ -171,8 +171,12 @@
    org-tags-column 0
    org-return-follows-link  t ; Follow the links
    org-log-done 'time
-   org-log-reschedule t
+   org-log-reschedule t)
+#+END_SRC
 
+** Org-agenda
+#+BEGIN_SRC emacs-lisp
+  (setq
    org-agenda-files '("~/Documents/orgfiles/")
    org-agenda-restore-windows-after-quit t
    org-agenda-window-setup 'current-window
