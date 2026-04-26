@@ -163,6 +163,7 @@
 
   (setq
    org-hidden-keywords '(title)
+   org-support-shift-select t
    org-hide-emphasis-markers t ; Hide the italic/bold... markers
    org-cycle-level-faces nil
    org-n-level-faces 4
@@ -178,18 +179,13 @@
    org-log-reschedule t
    org-log-into-drawer t
 
-   org-todo-keywords
+   org-todo-keywords ;C-u C-u C-c C-t, C-S-RIGHT/C-S-LEFT
    '((sequence
-      "TODO(t/!)"
-      "WAIT(w@/!)"
-      "|"
-      "DONE(d@)"
-      "CANCELED(c@)"))
+      "TODO(t/!)" "WAIT(w@/!)" "|" "DONE(d@)" "PAID(p@)" "CANCELED(c@)")
+     (sequence
+      "TODO(t/!)" "|" "DONE(d@)" ))
 
-   org-tag-alist
-   '(("TAIJI" . ?t)
-     ("PAY" . ?p)
-     ("ART" . ?a)))
+   org-tag-alist '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a)))
 #+END_SRC
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
