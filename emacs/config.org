@@ -162,7 +162,6 @@
    '(org-document-title ((t (:inherit outline-1 :foreground "#cdcdcd" :weight bold :height 1.8)))))
 
   (setq
-   org-log-into-drawer t
    org-hidden-keywords '(title)
    org-hide-emphasis-markers t ; Hide the italic/bold... markers
    org-cycle-level-faces nil
@@ -170,11 +169,28 @@
    org-startup-indented t
    org-indent-indentation-per-level 2
    org-tags-column 0
-   org-return-follows-link  t ; Follow the links
-   org-log-done 'time
-   org-log-reschedule t)
+   org-return-follows-link  t) ; Follow the links
 #+END_SRC
+** Org-todo
+#+BEGIN_SRC emacs-lisp
+  (setq
+   org-log-done 'time
+   org-log-reschedule t
+   org-log-into-drawer t
 
+   org-todo-keywords
+   '((sequence
+      "TODO(t/!)"
+      "WAIT(w@/!)"
+      "|"
+      "DONE(d@)"
+      "CANCELED(c@)"))
+
+   org-tag-alist
+   '(("TAIJI" . ?t)
+     ("PAY" . ?p)
+     ("ART" . ?a)))
+#+END_SRC
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
   (setq
