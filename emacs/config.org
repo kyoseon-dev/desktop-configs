@@ -1,4 +1,4 @@
-#+TITLE:NOOONSO emacs config
+#+TITLE:NoooNso emacs config
 #+STARTUP: fold
 
 * Preparing for lift-off
@@ -174,18 +174,24 @@
 #+END_SRC
 ** Org-todo
 #+BEGIN_SRC emacs-lisp
-  (setq
-   org-log-done 'time
-   org-log-reschedule t
-   org-log-into-drawer t
+   (setq
+    org-log-done 'time
+    org-log-reschedule t ; C-s
+    org-log-into-drawer t
+    org-enforce-todo-dependencies t ; block ordered tasks
+    org-track-ordered-property-with-tag t ; add :ORDERED: tag
+    org-enforce-todo-checkbox-dependencies t
 
-   org-todo-keywords ;C-u C-u C-c C-t, C-S-RIGHT/C-S-LEFT
-   '((sequence
-      "TODO(t/!)" "WAIT(w@/!)" "|" "DONE(d@)" "PAID(p@)" "CANCELED(c@)")
-     (sequence
-      "TODO(t/!)" "|" "DONE(d@)" ))
+    org-todo-keywords ; C-u C-u C-c C-t, C-S-RIGHT/C-S-LEFT
+    '((sequence
+       "TODO(t/!)" "WAIT(w@/!)" "PROJ(p)"
+       "|"
+       "DONE(d@)" "PAID(a@)" "CANCELED(c@)")
+      (sequence
+       "TODO(t/!)" "|" "DONE(d@)"))
 
-   org-tag-alist '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a)))
+    org-tag-alist ; C-q
+  '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a)))
 #+END_SRC
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
