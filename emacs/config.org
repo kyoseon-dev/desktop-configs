@@ -70,6 +70,7 @@
   (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
   (global-set-key (kbd "<f5>") 'org-agenda)
   (global-set-key (kbd "<f6>") 'org-capture)
+  (global-set-key (kbd "<f9>") 'dashboard-open)
 
   (evil-define-key 'normal 'global (kbd "<leader>d") 'dired)
   (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
@@ -176,8 +177,9 @@
 #+BEGIN_SRC emacs-lisp
    (setq
     org-log-done 'time
-    org-log-reschedule t ; C-s
+    org-log-reschedule t ; C-c C-s
     org-log-into-drawer t
+    org-clock-into-drawer "CLOCKING"
     org-enforce-todo-dependencies t ; block ordered tasks
     org-track-ordered-property-with-tag t ; add :ORDERED: tag
     org-enforce-todo-checkbox-dependencies t
@@ -222,7 +224,6 @@
 
 * Dashboard
 #+BEGIN_SRC emacs-lisp
-  [ ; currently disabled
   (require 'dashboard)
 
   (setq
@@ -247,7 +248,6 @@
          dashboard-insert-items)
   )
 
-  (dashboard-setup-startup-hook)
-  ]
+  ;(dashboard-setup-startup-hook)
 #+END_SRC
 
