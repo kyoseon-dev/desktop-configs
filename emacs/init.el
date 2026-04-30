@@ -9,8 +9,6 @@
 
 (setq comp-deferred-compilation t)
 
-(add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
-
 (package-initialize)
 
 (unless (package-installed-p 'use-package)

@@ -8,11 +8,13 @@
    (interactive)
    (load-file (expand-file-name "init.el" user-emacs-directory)))
 
+  (add-to-list 'default-frame-alist '(undecorated . t))
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
   (setq-default frame-title-format "%b %&")
   (defun display-startup-echo-area-message () (message "")) ; Disable startup message.
+  (add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
 #+END_SRC
 
 * Evil
@@ -73,7 +75,7 @@
   (global-set-key (kbd "<f9>") 'dashboard-open)
 
   (evil-define-key 'normal 'global (kbd "<leader>d") 'dired)
-  (evil-define-key 'normal 'global (kbd "<leader>b") 'switch-to-buffer)
+  (evil-define-key 'normal 'global (kbd "<leader>b") 'ibuffer)
   (evil-define-key 'normal 'global (kbd "<leader>s") 'save-buffer)
   (evil-define-key 'normal 'global (kbd "<leader>k") 'kill-buffer)
 
@@ -103,6 +105,8 @@
 ** Misc
 #+BEGIN_SRC emacs-lisp
   (require 'olivetti)
+  (require 'beacon)
+  (beacon-mode 1)
 #+END_SRC
 
 * Git
@@ -142,6 +146,10 @@
 
   (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
   (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
+
+  (require 'ivy-posframe)
+  (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
+  (ivy-posframe-mode 1)
 #+END_SRC
 
 * Org-mode
@@ -175,25 +183,25 @@
 #+END_SRC
 ** Org-todo
 #+BEGIN_SRC emacs-lisp
-   (setq
-    org-log-done 'time
-    org-log-reschedule t ; C-c C-s
-    org-log-into-drawer t
-    org-clock-into-drawer "CLOCKING"
-    org-enforce-todo-dependencies t ; block ordered tasks
-    org-track-ordered-property-with-tag t ; add :ORDERED: tag
-    org-enforce-todo-checkbox-dependencies t
+  (setq
+   org-log-done 'time
+   org-log-reschedule t ; C-c C-s
+   org-log-into-drawer t
+   org-clock-into-drawer "CLOCKING"
+   org-enforce-todo-dependencies t ; block ordered tasks
+   org-track-ordered-property-with-tag t ; add :ORDERED: tag
+   org-enforce-todo-checkbox-dependencies t
 
-    org-todo-keywords ; C-u C-u C-c C-t, C-S-RIGHT/C-S-LEFT
-    '((sequence
-       "TODO(t/!)" "WAIT(w@/!)" "PROJ(p)"
-       "|"
-       "DONE(d@)" "PAID(a@)" "CANCELED(c@)")
-      (sequence
-       "TODO(t/!)" "|" "DONE(d@)"))
+   org-todo-keywords ; C-u C-u C-c C-t, C-S-RIGHT/C-S-LEFT
+   '((sequence
+      "TODO(t/!)" "WAIT(w@/!)" "PROJ(p)"
+      "|"
+      "DONE(d@)" "PAID(a@)" "CANCELED(c@)")
+     (sequence
+      "TODO(t/!)" "|" "DONE(d@)"))
 
-    org-tag-alist ; C-q
-  '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a)))
+   org-tag-alist ; C-q
+   '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a)))
 #+END_SRC
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
