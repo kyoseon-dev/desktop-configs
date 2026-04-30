@@ -64,7 +64,7 @@
   (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-** Key bindings
+** Global key bindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
   (global-set-key (kbd "C-<tab>") #'other-window)
@@ -72,16 +72,9 @@
   (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
   (global-set-key (kbd "<f5>") 'org-agenda)
   (global-set-key (kbd "<f6>") 'org-capture)
+  (global-set-key (kbd "<f7>") 'ibuffer)
+  (global-set-key (kbd "<f8>") 'dired)
   (global-set-key (kbd "<f9>") 'dashboard-open)
-
-  (evil-define-key 'normal 'global (kbd "<leader>d") 'dired)
-  (evil-define-key 'normal 'global (kbd "<leader>b") 'ibuffer)
-  (evil-define-key 'normal 'global (kbd "<leader>s") 'save-buffer)
-  (evil-define-key 'normal 'global (kbd "<leader>k") 'kill-buffer)
-
-  ; org-mode
-  (evil-define-key 'normal 'org-mode-map (kbd "TAB") 'org-cycle)
-  (evil-define-key 'normal 'org-mode-map (kbd "<leader>cl") 'org-store-link)
 #+END_SRC
 
 ** Line numbers
@@ -91,6 +84,11 @@
   (setq-default
    display-line-numbers-width 5
    display-line-numbers-type 'relative)
+
+  (set-face-attribute 'line-number nil
+   :foreground "dim gray")
+  (set-face-attribute 'line-number-current-line nil
+   :background "gray20" :foreground "gray90")
 
   ; Disable line numbers for some modes
   (dolist
@@ -158,6 +156,8 @@
   (require 'org-modern)
   (add-hook 'org-mode-hook #'org-modern-mode)
   (global-org-modern-mode)
+
+  (define-key org-mode-map (kbd "<tab>") 'org-cycle)
 
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'olivetti-mode)
@@ -233,6 +233,8 @@
 * Dashboard
 #+BEGIN_SRC emacs-lisp
   (require 'dashboard)
+
+  (define-key dashboard-mode-map (kbd "<tab>") 'dashboard-jump-to-bookmarks)
 
   (setq
    dashboard-startup-banner 'logo-ansi-truecolor
