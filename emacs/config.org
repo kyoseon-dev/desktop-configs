@@ -19,23 +19,23 @@
 
 * Evil
 #+BEGIN_SRC emacs-lisp
-  (use-package evil
-   :demand t
-   :init
-   (setq evil-undo-system 'undo-fu)
-   (setq evil-search-module 'evil-search)
-   :config
-   (evil-mode 1)
-   (setq evil-ex-search-case 'sensitive))
+  ;(use-package evil
+  ; :demand t
+  ; :init
+  ; (setq evil-undo-system 'undo-fu)
+  ; (setq evil-search-module 'evil-search)
+  ; :config
+  ; (evil-mode 1)
+  ; (setq evil-ex-search-case 'sensitive))
 
-  (use-package undo-fu)
-  (use-package evil-numbers)
-  (use-package evil-surround
-   :demand t
-   :config
-   (global-evil-surround-mode 1))
+  ;(use-package undo-fu)
+  ;(use-package evil-numbers)
+  ;(use-package evil-surround
+  ; :demand t
+  ; :config
+  ; (global-evil-surround-mode 1))
 
-  (evil-set-leader 'normal (kbd "<SPC>") nil)
+  ;(evil-set-leader 'normal (kbd "<SPC>") nil)
 #+END_SRC
 
 * Global Generic Settings
@@ -92,12 +92,13 @@
 
   ; Disable line numbers for some modes
   (dolist
-  	 (mode '(term-mode-hook
-              shell-mode-hook
-              help-mode-hook
-              org-agenda-mode-hook
-              eshell-mode-hook))
-  	 (add-hook mode (lambda () (display-line-numbers-mode 0))))
+    (mode
+     '(term-mode-hook
+       shell-mode-hook
+       help-mode-hook
+       org-agenda-mode-hook
+       eshell-mode-hook))
+     (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 ** Misc
@@ -105,6 +106,16 @@
   (require 'olivetti)
   (require 'beacon)
   (beacon-mode 1)
+#+END_SRC
+
+* Org-babel
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (shell . t)
+    )
+  )
 #+END_SRC
 
 * Git
@@ -128,10 +139,10 @@
 * Modeline
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'mode-line nil
-  						  :foreground "#292929"
-  						  :background "#d3d3d3"
-  						  ;:box
-  						  )
+                      :foreground "#292929"
+                      :background "#d3d3d3"
+                      ;:box
+                      )
 #+END_SRC
 
 * Ivy
@@ -139,11 +150,8 @@
   (use-package ivy
     :demand t
     :config (ivy-mode)
-
-  (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
-
-  (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done)
-  (define-key ivy-minibuffer-map (kbd "<C-w>") 'evil-window-map))
+    (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
+    (define-key ivy-minibuffer-map (kbd "<C-return>") 'ivy-done))
 
   (require 'ivy-posframe)
   (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
@@ -157,7 +165,7 @@
   (add-hook 'org-mode-hook #'org-modern-mode)
   (global-org-modern-mode)
 
-  (define-key org-mode-map (kbd "<tab>") 'org-cycle)
+  ;(define-key org-mode-map (kbd "<tab>") 'org-cycle)
 
   (add-hook 'org-mode-hook 'org-indent-mode)
   (add-hook 'org-mode-hook 'olivetti-mode)
@@ -234,7 +242,7 @@
 #+BEGIN_SRC emacs-lisp
   (require 'dashboard)
 
-  (define-key dashboard-mode-map (kbd "<tab>") 'dashboard-jump-to-bookmarks)
+  ;(define-key dashboard-mode-map (kbd "<tab>") 'dashboard-jump-to-bookmarks)
 
   (setq
    dashboard-startup-banner 'logo-ansi-truecolor
