@@ -1,6 +1,7 @@
 vim.g.mapleader = vim.keycode("<space>")
 vim.g.maplocalleader = vim.keycode("\\")
 
+vim.keymap.set("i", "<C-g>", "<esc>", {})
 vim.keymap.set("n", "<leader>n", "<cmd>bnext<CR>", {})
 vim.keymap.set("n", "<leader>b", "<cmd>bprevious<CR>", {})
 vim.keymap.set("n", "<leader>d", "<cmd>bdelete<CR>", {})
