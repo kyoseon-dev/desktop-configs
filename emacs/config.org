@@ -195,12 +195,10 @@
 
 ** Org-capture
 #+BEGIN_SRC emacs-lisp
-  (custom-set-variables
-   '(org-capture-templates
-     '(("p" "Private templates")
-       ("pt" "TODO Entry" entry
-        (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
-        (file "~/.config/emacs/tpl/todo.txt")
-  	   :empty-lines-before 1))))
+  (setq org-capture-templates
+   '(("p" "Private templates")
+     ("pt" "TODO Entry" entry
+      (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
+      (file "~/.config/emacs/tpl/todo.txt") :empty-lines-before 1)))
 #+END_SRC
 
