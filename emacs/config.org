@@ -65,11 +65,6 @@
    display-line-numbers-width 5
    display-line-numbers-type 'relative)
 
-  (set-face-attribute 'line-number nil
-   :foreground "dim gray")
-  (set-face-attribute 'line-number-current-line nil
-   :background "gray20" :foreground "gray90")
-
   ; Disable line numbers for some modes
   (dolist
     (mode
@@ -96,7 +91,7 @@
   (use-package undo-fu
     :bind (
       ("C-/" . 'undo-fu-only-undo)
-      ("C-r" . 'undo-fu-only-redo)
+      ("C-S-r" . 'undo-fu-only-redo)
     ))
 #+END_SRC
 
@@ -121,22 +116,9 @@
 
 * Theme
 #+BEGIN_SRC emacs-lisp
-  (use-package inkpot-theme
-   :demand t
-   :config
-    (setq
-  	inkpot-theme-use-box t
-  	inkpot-theme-use-black-background t)
-    (load-theme 'inkpot t))
-#+END_SRC
-
-* Modeline
-#+BEGIN_SRC emacs-lisp
-  (set-face-attribute 'mode-line nil
-                      :foreground "#292929"
-                      :background "#d3d3d3"
-                      ;:box
-                      )
+  (setq custom-theme-load-path
+         '("~/.config/emacs/theme/" custom-theme-directory t))
+  (load-theme 'nooonso t)
 #+END_SRC
 
 * Ivy
@@ -161,13 +143,6 @@
     (org-mode . org-modern-mode)
     (org-mode . org-indent-mode)
   )
-
-  ; Face setting
-  (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :foreground "#8b8bde" :height 1.38))))
-   '(org-level-2 ((t (:inherit outline-2 :foreground "#abbeef" :height 1.23))))
-   '(org-level-3 ((t (:inherit outline-3 :foreground "#adcbed" :height 1.10))))
-   '(org-document-title ((t (:inherit outline-1 :foreground "#cdcdcd" :weight bold :height 1.8)))))
 
   (setq
    org-hidden-keywords '(title)
@@ -227,35 +202,5 @@
         (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
         (file "~/.config/emacs/tpl/todo.txt")
   	   :empty-lines-before 1))))
-#+END_SRC
-
-* Dashboard
-#+BEGIN_SRC emacs-lisp
-  (use-package dashboard
-    :defer t
-    :commands (dashboard-open)  
-    :config
-    (setq
-     dashboard-startup-banner 'logo-ansi-truecolor
-     dashboard-center-content t
-     dashboard-vertically-center-content t
-     dashboard-show-shortcuts nil
-
-     dashboard-items
-     '((recents   . 5)
-       (bookmarks . 5)
-       (projects  . 5)
-       (agenda    . 5)
-       (registers . 5))
-
-     dashboard-startupify-list
-     '(dashboard-insert-banner
-       dashboard-insert-newline
-       dashboard-insert-navigator
-       dashboard-insert-newline
-       dashboard-insert-init-info
-       dashboard-insert-items)
-     )
-    :bind ("<f9>" . dashboard-open))
 #+END_SRC
 
