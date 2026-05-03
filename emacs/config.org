@@ -21,7 +21,8 @@
 ** Options
 #+BEGIN_SRC emacs-lisp
   (setq
-   visible-bell 0
+   visible-bell nil
+   ring-bell-function 'ignore
    select-enable-clipboard t ; use the clipboard in addition to kill-ring
    large-file-warning-threshold nil
    split-height-threshold 40
@@ -37,6 +38,7 @@
    tab-width 3
    fill-column 80)
 
+  (which-key-mode)
   (set-fringe-mode 10)
   (global-display-fill-column-indicator-mode 0)
        
@@ -90,6 +92,12 @@
 
   (use-package beacon
     :hook (after-init . beacon-mode))
+
+  (use-package undo-fu
+    :bind (
+      ("C-/" . 'undo-fu-only-undo)
+      ("C-r" . 'undo-fu-only-redo)
+    ))
 #+END_SRC
 
 * Org-babel
@@ -143,13 +151,6 @@
      (setq ivy-height-alist
       `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
      (ivy-mode))
-
-  (use-package ivy-posframe
-    :after ivy
-    :config
-    (setq ivy-posframe-display-functions-alist
-          '((t . ivy-posframe-display)))
-    (ivy-posframe-mode))
 #+END_SRC
 
 * Org-mode

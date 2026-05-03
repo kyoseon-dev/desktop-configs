@@ -10,10 +10,19 @@
      ("pt" "TODO Entry" entry
       (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
       (file "~/.config/emacs/tpl/todo.txt") :empty-lines-before 1)))
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(beacon dashboard git-gutter inkpot-theme nerd-icons olivetti org-modern
+            undo-fu)))
 
 (setq comp-deferred-compilation t)
 
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.
+;; See `package-archive-priorities` and `package-pinned-packages`.
+;; Most users will not need or want to do this.
+;; (add-to-list 'package-archives
+;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
