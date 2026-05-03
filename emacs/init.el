@@ -6,10 +6,10 @@
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
  '(org-capture-templates
-	'(("p" "Private templates")
-	  ("pt" "TODO Entry" entry
-		(file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
-		(file "~/.config/emacs/tpl/todo.txt") :empty-lines-before 1)))
+   '(("p" "Private templates")
+     ("pt" "TODO Entry" entry
+      (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
+      (file "~/.config/emacs/tpl/todo.txt") :empty-lines-before 1)))
  '(package-selected-packages nil))
 
 (setq comp-deferred-compilation t)

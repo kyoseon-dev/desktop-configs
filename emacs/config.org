@@ -82,7 +82,7 @@
 ** Misc
 #+BEGIN_SRC emacs-lisp
   (use-package olivetti
-    :load-path "~/.config/emacs/packages/"
+    :ensure nil
     :hook
     (org-mode . olivetti-mode)
     (org-agenda-mode-hook . olivetti-mode)
@@ -105,8 +105,8 @@
 * Git
 #+begin_src emacs-lisp
   (use-package git-gutter
+    :ensure nil
     :defer t
-    :load-path "~/.config/emacs/packages/"
     :config (setq git-gutter:update-interval 0.03)
     :hook (after-init . global-git-gutter-mode))
 #+end_src
@@ -135,19 +135,21 @@
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
     :demand t
-    ;:bind (:repeat-map ivy+-minibuffer-map
-    ;  ("C-RET" 'ivy-done)		  
-    ; )
+    :bind (
+      :map ivy-minibuffer-map
+      ("C-RET" . 'ivy-done)		  
+     )
     :config
      (setq ivy-height-alist
       `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
-     (ivy-mode)
-     (use-package ivy-posframe
-      :config
-  	 (setq ivy-posframe-display-functions-alist
-      '((t . ivy-posframe-display)))
-  	 (ivy-posframe-mode))
-  )
+     (ivy-mode))
+
+  (use-package ivy-posframe
+    :after ivy
+    :config
+    (setq ivy-posframe-display-functions-alist
+          '((t . ivy-posframe-display)))
+    (ivy-posframe-mode))
 #+END_SRC
 
 * Org-mode
@@ -230,6 +232,7 @@
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard
     :defer t
+    :commands (dashboard-open)  
     :config
     (setq
      dashboard-startup-banner 'logo-ansi-truecolor
