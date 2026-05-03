@@ -53,6 +53,7 @@
    auto-save-default nil)
 
   (setq-default
+   indent-tabs-mode nil
    tab-stop 3
    tab-width 3
    fill-column 80)
@@ -103,8 +104,11 @@
 #+BEGIN_SRC emacs-lisp
   (use-package olivetti
     :load-path "~/.config/emacs/packages/"
+    :hook
+    (org-mode . olivetti-mode)
+    (org-agenda-mode-hook . olivetti-mode)
     :bind ("<f3>" . olivetti-mode))
-  
+
   (use-package beacon
     :hook (after-init . beacon-mode))
 #+END_SRC
@@ -170,13 +174,11 @@
 * Org-mode
 ** Generic settings
 #+BEGIN_SRC emacs-lisp
-  (require 'org-modern)
-  (add-hook 'org-mode-hook #'org-modern-mode)
-  (global-org-modern-mode)
-
-  (add-hook 'org-mode-hook 'org-indent-mode)
-  (add-hook 'org-mode-hook 'olivetti-mode)
-  (add-hook 'org-agenda-mode-hook 'olivetti-mode)
+  (use-package org-modern
+    :hook
+    (org-mode . org-modern-mode)
+    (org-mode . org-indent-mode)
+  )
 
   ; Face setting
   (custom-set-faces
