@@ -17,27 +17,6 @@
   (add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
 #+END_SRC
 
-* Evil
-#+BEGIN_SRC emacs-lisp
-  ;(use-package evil
-  ; :demand t
-  ; :init
-  ; (setq evil-undo-system 'undo-fu)
-  ; (setq evil-search-module 'evil-search)
-  ; :config
-  ; (evil-mode 1)
-  ; (setq evil-ex-search-case 'sensitive))
-
-  ;(use-package undo-fu)
-  ;(use-package evil-numbers)
-  ;(use-package evil-surround
-  ; :demand t
-  ; :config
-  ; (global-evil-surround-mode 1))
-
-  ;(evil-set-leader 'normal (kbd "<SPC>") nil)
-#+END_SRC
-
 * Global Generic Settings
 ** Options
 #+BEGIN_SRC emacs-lisp
@@ -128,7 +107,7 @@
   (use-package git-gutter
     :defer t
     :load-path "~/.config/emacs/packages/"
-    :init (setq git-gutter:update-interval 0.03)
+    :config (setq git-gutter:update-interval 0.03)
     :hook (after-init . global-git-gutter-mode))
 #+end_src
 
@@ -136,11 +115,11 @@
 #+BEGIN_SRC emacs-lisp
   (use-package inkpot-theme
    :demand t
-   :init
+   :config
     (setq
   	inkpot-theme-use-box t
   	inkpot-theme-use-black-background t)
-   :config (load-theme 'inkpot t))
+    (load-theme 'inkpot t))
 #+END_SRC
 
 * Modeline
@@ -156,17 +135,17 @@
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
     :demand t
-    :init
-     (setq ivy-height-alist `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
     ;:bind (:repeat-map ivy+-minibuffer-map
     ;  ("C-RET" 'ivy-done)		  
     ; )
     :config
-    (ivy-mode)
+     (setq ivy-height-alist
+      `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
+     (ivy-mode)
      (use-package ivy-posframe
-  	 :init
-  	 (setq ivy-posframe-display-functions-alist '((t . ivy-posframe-display)))
-  	 :config
+      :config
+  	 (setq ivy-posframe-display-functions-alist
+      '((t . ivy-posframe-display)))
   	 (ivy-posframe-mode))
   )
 #+END_SRC
@@ -250,28 +229,29 @@
 * Dashboard
 #+BEGIN_SRC emacs-lisp
   (use-package dashboard
-  :init
-  (setq
-   dashboard-startup-banner 'logo-ansi-truecolor
-   dashboard-center-content t
-   dashboard-vertically-center-content t
-   dashboard-show-shortcuts nil
+    :defer t
+    :config
+    (setq
+     dashboard-startup-banner 'logo-ansi-truecolor
+     dashboard-center-content t
+     dashboard-vertically-center-content t
+     dashboard-show-shortcuts nil
 
-   dashboard-items
-   '((recents   . 5)
-     (bookmarks . 5)
-     (projects  . 5)
-     (agenda    . 5)
-     (registers . 5))
+     dashboard-items
+     '((recents   . 5)
+       (bookmarks . 5)
+       (projects  . 5)
+       (agenda    . 5)
+       (registers . 5))
 
-   dashboard-startupify-list
-   '(dashboard-insert-banner
-     dashboard-insert-newline
-     dashboard-insert-navigator
-     dashboard-insert-newline
-     dashboard-insert-init-info
-     dashboard-insert-items)
-   )
-  :bind ("<f9>" . dashboard-open))
+     dashboard-startupify-list
+     '(dashboard-insert-banner
+       dashboard-insert-newline
+       dashboard-insert-navigator
+       dashboard-insert-newline
+       dashboard-insert-init-info
+       dashboard-insert-items)
+     )
+    :bind ("<f9>" . dashboard-open))
 #+END_SRC
 
