@@ -5,18 +5,22 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
- '(package-selected-packages
-   '(beacon git-gutter inkpot-theme nerd-icons olivetti org-modern undo-fu)))
+ '(package-selected-packages '(beacon git-gutter nerd-icons olivetti org-modern undo-fu)))
 
 (setq comp-deferred-compilation t)
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.
 ;; See `package-archive-priorities` and `package-pinned-packages`.
 ;; Most users will not need or want to do this.
 ;; (add-to-list 'package-archives
 ;;              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(setq package-archives
+      '(("melpa" . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/melpa/")
+        ("org"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/org/")
+        ("gnu"   . "https://raw.githubusercontent.com/d12frosted/elpa-mirror/master/gnu/")))
+
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
