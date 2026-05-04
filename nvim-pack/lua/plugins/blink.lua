@@ -1,3 +1,4 @@
+--[[
 vim.pack.add({
 	{
 		src = "https://github.com/saghen/blink.cmp",
@@ -40,3 +41,4 @@ require('blink.cmp').setup({
 	cmdline = { enabled = true, },
 	fuzzy = { implementation = "prefer_rust_with_warning" },
 })
+--]]
