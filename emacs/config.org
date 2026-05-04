@@ -12,8 +12,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (scroll-bar-mode -1)
-  (setq-default frame-title-format "%b %&")
-  (defun display-startup-echo-area-message () (message "")) ; Disable startup message.
+  (defun display-startup-echo-area-message () (message ""))
   (add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
 #+END_SRC
 
@@ -65,7 +64,6 @@
    display-line-numbers-width 5
    display-line-numbers-type 'relative)
 
-  ; Disable line numbers for some modes
   (dolist
     (mode
      '(term-mode-hook
@@ -81,8 +79,7 @@
   (use-package olivetti
     :ensure nil
     :hook
-    (org-mode . olivetti-mode)
-    (org-agenda-mode-hook . olivetti-mode)
+    ((org-mode org-agenda-mode) . olivetti-mode)
     :bind ("<f3>" . olivetti-mode))
 
   (use-package beacon
@@ -95,14 +92,8 @@
     ))
 #+END_SRC
 
-* Org-babel
+* Modeline
 #+BEGIN_SRC emacs-lisp
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '(
-     (shell . t)
-    )
-  )
 #+END_SRC
 
 * Git
@@ -110,7 +101,11 @@
   (use-package git-gutter
     :ensure nil
     :defer t
-    :config (setq git-gutter:update-interval 0.03)
+    :config
+     (setq git-gutter:update-interval 0.03)
+     (set-face-foreground 'git-gutter:modified "blue violet")
+     (set-face-foreground 'git-gutter:added "chartreuse4")
+     (set-face-foreground 'git-gutter:deleted "OrangeRed3")
     :hook (after-init . global-git-gutter-mode))
 #+end_src
 
@@ -175,7 +170,7 @@
       "TODO(t/!)" "|" "DONE(d@)"))
 
    org-tag-alist ; C-q
-   '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a)))
+   '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a) ("DELVE" . ?d)))
 #+END_SRC
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
@@ -200,5 +195,15 @@
      ("pt" "TODO Entry" entry
       (file+headline "~/Documents/orgfiles/capture.org" "CAPTURE")
       (file "~/.config/emacs/tpl/todo.txt") :empty-lines-before 1)))
+#+END_SRC
+
+** Org-babel
+#+BEGIN_SRC emacs-lisp
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(
+     (shell . t)
+    )
+  )
 #+END_SRC
 

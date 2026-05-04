@@ -1,0 +1,254 @@
+#+title:Notes for emacs
+#+STARTUP: fold
+
+* Default keybindings
+** Basic control
+- C-g: Quit partially entered command or emacs not responding
+- C-v: Page down
+- M-v: Page up
+- C-l: Move text around the cursor to the center of screen
+- C-n: Next line
+- C-p: Previous line
+- C-f: Forward char
+- C-b: Backward char
+- M-f: Forward word
+- M-b: Backward word
+- C-a: Beginning of line
+- C-e: End of line
+- M-a: Beginning of sentence
+- M-e: End of sentence
+- M-<: Beginning of whole text
+- M->: End of whole text
+- Repeat command: C-u/M digit, ex: C-u 8 C-v or M-8 C-v
+** Window
+- C-x o: jump to other window
+- C-x 0: kill current windows)
+- C-x 1: one window(kill all other windows)
+- C-x 2: split window horizontally
+- C-x 3: split window veritcally
+- C-M-v: scroll the other window
+** Frame
+- C-x 5 2: new frame
+- C-x 5 c: copy frame
+- C-x 5 0: remove frame
+** Insert and Delete
+- C-d: Delete the next character
+- M-d: Kill the next word
+- M-SPC: Delete spaces and tabs arround point
+- C-k: Kill from the cursor position to end of line
+- M-k: Kill the end of the sentence
+- M-^: Join with previous line
+- C-x C-o: Delete blank lines
+- C-w: 'clipboard-kill-region
+- M-w: 'clipboard-kill-ring-save
+- C-y: 'clipboard-yank
+- M-y: 'yank-pop (copy from clipboard)
+- C-/: Undo
+- C-S-<del>: Kill whole line
+- C-SPC: set rectangle
+- C-x r SPC r: Save position to register
+- C-x r j r: Jump to the position saved in register
+- C-x r s r: Copy region into register
+- C-x r r r: Copy rectangle into register
+- C-x r i r: Insert from register
+- M-/: 'dabbrev-expand
+- M-C-/: 'dabbrev-completion
+** Buffer
+- C-x C-f  : Find file
+- C-x 4 C-f: Find file in other window
+- C-x f    : Change fill column
+- C-x C-s  : Save buffer to file
+- C-x s    : Save some buffers to file
+- C-x C-b  : List buffers
+- C-x b    : Switch buffer
+- C-x C-c  : Quit Emacs
+- C-x k    : Kill buffer
+- C-x z    : Repeat last command and type 'z' for next repeat
+** Replace string
+- M-x repl s<ret>changed<ret>altered<ret>
+** Searching
+- C-s: Forward search
+- C-r: Backward search
+
+* Org-mode
+** Headline & outline
+- Increase or decrease level: "M-<right>" or "M-<left>"
+- Move up/down within a level: "M-<up>" or "M-<down>"
+
+** Schedule deadline & agenda
+- Enable/Disable agenda file to front: "C-c [" or " C-c ]"
+- Scheduling is done: "C-c C-s"
+- Deadlines are define: "C-c C-d"
+- Switch to agenda view: "M-x org-agenda"
+- Follow mode: "S-f"
+- Move forward/backward: "f" or "b"
+
+** ToDo
+- Default is TODO and DONE
+- Cycling through them: "S-<right>" or "S-<left>"
+- More keywords can be defined with a line
+  #+SEQ_TODO:
+  Items left of | are ToDo Items (red)
+  Items right of | are Done Items (green)
+  Activate line: "C-c C-c"
+- Get a menu of all keywords: "C-c C-t"
+
+** Repeating tasks
+-  +1w: Next occurence in one week. (w=week, d=day, m=month, y=year)
+- ++1w: Next occurence on the same day of week, but definitely in the future
+- .+4w: Next occurence 4 weeks after the task is marked as done.
+
+** Tags
+- To assign tags to a headline: "C-c C-q"
+
+** Drawer
+- ":SOME_NAME:" is a drawer
+- Reserved drawer names are e.g. ":LOGBOOK" or ":PROPERTIES"
+- Take quick notes: "C-c C-z"
+*** DONE Link quick notes and drawer
+SCHEDULED: <2026-04-22 Wed>
+:LOGBOOK:
+- Note taken on [2026-04-22 Wed 00:33] \\
+  (setq org-log-into-drawer t|DRAWER) worked.
+:END:
+
+** Archiving
+- Define a global archive file: "#+ARCHIVE: myfile.org::"
+- Custom archiving in subtree
+  :PROPERTIES:
+  :ARCHIVE: other_archive.org::* Read Books
+  :END
+- Archive an entry: "C-c C-x C-a"
+- Archive a subtree: "C-c C-x C-s"
+- Search all subtrees under a headline and see which one can be archived:
+  "C-u C-c C-x C-s"
+
+** Automatic logging
+- #+SEQ_TODO: TODO(t@/!)
+  t: hotkey
+  @: log a timestamp and a note when this is entered
+  !: log a timestamp when you leave that keyword
+- (setq org-log-done t|'time)
+- (setq org-log-reschedule t)
+
+** Splitting system up
+- Cusomize org-agenda-files
+- Customize refile function
+  * org-refile-targets
+  * org-refile-use-outline-path
+  * org-refile-allow-creating-parent-nodes
+- Move entries: "C-c C-w"
+- Copy entries: "C-c M-w"
+
+** Ordered tasks 
+- Define an :ORDERED: property with value 't'
+- Toggle :ORDERED: property: "C-c C-x o"
+- Variables
+  (org-enforce-todo-dependencies t)
+  (org-track-ordered-property-with-tag t)
+- More customization
+  org-agenda-dim-blocked-tasks ; maybe deprecated
+  org-enforce-todo-checkbox-dependencies
+
+** Timer
+- Start a count timer: "C-c C-x ;"
+- Start a relative timer: "C-c C-x 0"
+- Start a relative timer with offset: "C-u C-c C-x 0"
+- Insert simple time stamp: "C-c C-x ."
+- Insert description time stamp: "time stamp ::"
+- Toggle pause/start timer: "C-c C-x ,"
+- Stop timer: "C-u C-c C-x ,"
+
+** Clocking
+- Clock in/out: "C-c C-x C-i" / "C-c C-x C-o"
+- (setq org-clock-into-drawer "CLOCKING")
+- Restart a clock: "C-c C-x C-x"
+- Restart with menu: "C-u C-c C-x C-x"
+- Jump to clocked task: "C-c C-x C-j"
+- Cancel clock: "C-c C-x C-q"
+- Show times: "C-c C-x C-d"
+
+** Column view
+- Define column with
+  #+COLUMNS: %7TODO(To Do) %58ITEM(Task) ...
+- Locally define
+  :COLUMNS: in a property drawer
+- Show column view: "C-c C-x C-c"
+- Leave column view: "q"
+  
+** Effort estimates
+- Define #+PROPERTY: Effort_ALL 0:05 0:10 0:15 0:20 0:30 1:00 1:30
+- Define #+PROPERTY: Rating_ALL ★ ★★ ★★★ ★★★★ ★★★★★
+- Add column view %8Effort(Effort){:}
+- Effort stored like this
+  :PROPERTIES:
+  :Effort: 1:00
+  :END:
+- Show column view: "C-c C-x C-c"
+- Increase effort: "S-right"
+- Decrease effort: "S-left"
+- Leave column view: "q"
+
+** Internal linking
+- [[target] or [[target][description]
+- target
+  * A headline
+  * A #+NAME: target line
+  * An item with a :CUSTOM_ID: property
+- Radio target: <<< target >>> creates links on the fly
+- Edit links: "C-c C-l"
+- Follow link: "C-c C-o"
+- Return to previous position: "C-c &"
+
+** External linking
+- [[target][description]
+- target: protocol:location
+- ID create: "M-x org-id-get-create"
+- customizing: org-id-locations-file stores in what file orgmode should look for IDs
+
+** Attachments
+- Call the attachment system: C-c C-a
+
+** Priorities
+- Cycle through priorities: S-<up> or S-<down>
+- Direct setting: C-c ,
+  
+** Tables
+- Separate column with "|"
+- Start rows with "|-" and press <ret>
+- Move rows with M-<up> or M-<down>
+- Move columns with M-<left> or M-<right>
+- Delete column with M-S-<left>
+- Insert a new column left with M-S-<right>
+- Insert a horizontal line with C-c -
+- Define constants with #+CONSTANTS :
+- Define formulas #+TBLFM :
+  * Calculate on column: C-c =
+  * Re-apply equations to current line: C-c *
+  * Re-apply equations to entire table: C-u C-c *
+  * Columns referenced by $colnum
+  * Rows refrenced by @rownum
+
+** Exporting
+- Call export tool: C-c C-e
+- Add a line #+OPTIONS : to fine tune
+  - d:t Show drawer
+  - \n:t Preserve line break
+  - p:t Export planning info(SCHEDULE/DEADLINE)
+  - todo:t Export TODO keywords
+
+* Performance
+- ;; "- - lexical-binding: t; -*-"
+- Use use-package for lazy loading
+- treesit-auto
+- Minibuffer
+  * vertico: frontend completion UI
+  * orderless: backend completion style
+  * consult: backend completion functions
+  * marginalia: annotations
+  * embark: actions on completion buffer
+- Inbuffer
+  * corfu: frontend completion UI
+  * orderless: backend completion style
+  * cape: backend completion functions
+  * eglot: backend LSP client
