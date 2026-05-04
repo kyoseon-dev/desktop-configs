@@ -43,6 +43,7 @@
 - M-w: 'clipboard-kill-ring-save
 - C-y: 'clipboard-yank
 - M-y: 'yank-pop (copy from clipboard)
+- C-c ': 'org-edit-src-code
 - C-/: Undo
 - C-S-<del>: Kill whole line
 - C-SPC: set rectangle

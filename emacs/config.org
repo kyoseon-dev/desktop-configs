@@ -20,21 +20,20 @@
 ** Options
 #+BEGIN_SRC emacs-lisp
   (use-package emacs
-    :custom
-    (context-menu-mode t)
-    (tab-always-indent 'complete)
-    (text-mode-ispell-word-completion nil)
-    (read-extended-command-predicate
-     #'command-completion-default-include-p)
-    (minibuffer-prompt-properties
-     '(read-only t cursor-intangible t face minibuffer-prompt))
-    :config
-    (which-key-mode)
-    (set-fringe-mode 10)
-    (global-display-fill-column-indicator-mode 0)
-    (prefer-coding-system 'utf-8)
-    (defalias 'yes-or-no-p 'y-or-n-p)
-   )
+   :custom
+   (context-menu-mode t)
+   (tab-always-indent 'complete)
+   (text-mode-ispell-word-completion nil)
+   (read-extended-command-predicate
+    #'command-completion-default-include-p)
+   (minibuffer-prompt-properties
+    '(read-only t cursor-intangible t face minibuffer-prompt))
+   :config
+   (which-key-mode)
+   (set-fringe-mode 0)
+   (global-display-fill-column-indicator-mode 0)
+   (prefer-coding-system 'utf-8)
+   (defalias 'yes-or-no-p 'y-or-n-p))
 
   (setq
    visible-bell nil
@@ -88,16 +87,16 @@
 ** Misc
 #+BEGIN_SRC emacs-lisp
   (use-package olivetti
-    :ensure nil
-    :hook
-    ((org-mode org-agenda-mode) . olivetti-mode)
-    :bind ("<f3>" . olivetti-mode))
+   :ensure nil
+   :hook
+   ((org-mode org-agenda-mode) . olivetti-mode)
+   :bind
+   ("<f3>" . olivetti-mode))
 
   (use-package undo-fu
-    :bind (
-      ("C-/" . 'undo-fu-only-undo)
-      ("C-S-r" . 'undo-fu-only-redo)
-    ))
+    :bind
+    (("C-/" . 'undo-fu-only-undo)
+     ("C-S-r" . 'undo-fu-only-redo)))
 #+END_SRC
 
 * Git
@@ -132,9 +131,9 @@
    :init
    (advice-add #'register-preview :override #'consult-register-window)
    (setq
-     register-preview-delay 0.5
-     xref-show-xrefs-function #'consult-xref
-     xref-show-definitions-function #'consult-xref)
+    register-preview-delay 0.5
+    xref-show-xrefs-function #'consult-xref
+    xref-show-definitions-function #'consult-xref)
    :config
    (consult-customize
     consult-theme :preview-key '(:debounce 0.2 any)
@@ -154,25 +153,43 @@
    :config
    (setq
     corfu-auto t
-    corfu-auto-delay 0.2
+    corfu-auto-delay 0.1
     corfu-auto-trigger "."))
-
+  
   (use-package orderless
-    :custom
-    (custom-styles '(orderless basic))
-    (completion-category-overrides '((file (styles partial-completion))))
-    (completion-pcm-leading-wildcard t))
+   :custom
+   (custom-styles '(orderless basic))
+   (completion-category-overrides '((file (styles partial-completion))))
+   (completion-pcm-leading-wildcard t))
+
+  (use-package company
+   :init
+   (global-company-mode))
 #+END_SRC
+
+* LSP
+#+BEGIN_SRC emacs-lisp
+  (use-package rust-ts-mode
+   :ensure rust-ts-mode
+   :mode "\\.rs\\'"
+   :defer t)
+  (use-package lua-ts-mode
+   :ensure lua-ts-mode
+   :mode "\\.lua\\'"
+   :defer t)
+#+END_SRC
+
 * Org-mode
 ** Generic settings
 #+BEGIN_SRC emacs-lisp
   (use-package org-modern
-    :hook
-    (org-mode . org-modern-mode)
-    (org-mode . org-indent-mode)
+   :hook
+   (org-mode . org-modern-mode)
+   (org-mode . org-indent-mode)
   )
 
   (setq
+   org-src-preserve-indentation 1
    org-hidden-keywords '(title)
    org-support-shift-select t
    org-hide-emphasis-markers t ; Hide the italic/bold... markers
@@ -234,9 +251,6 @@
 #+BEGIN_SRC emacs-lisp
   (org-babel-do-load-languages
    'org-babel-load-languages
-   '(
-     (shell . t)
-    )
-  )
+   '((shell . t)))
 #+END_SRC
 
