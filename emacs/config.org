@@ -19,6 +19,23 @@
 * Global Generic Settings
 ** Options
 #+BEGIN_SRC emacs-lisp
+  (use-package emacs
+    :custom
+    (context-menu-mode t)
+    (tab-always-indent 'complete)
+    (text-mode-ispell-word-completion nil)
+    (read-extended-command-predicate
+     #'command-completion-default-include-p)
+    (minibuffer-prompt-properties
+     '(read-only t cursor-intangible t face minibuffer-prompt))
+    :config
+    (which-key-mode)
+    (set-fringe-mode 10)
+    (global-display-fill-column-indicator-mode 0)
+    (prefer-coding-system 'utf-8)
+    (defalias 'yes-or-no-p 'y-or-n-p)
+   )
+
   (setq
    visible-bell nil
    ring-bell-function 'ignore
@@ -36,13 +53,6 @@
    tab-stop 3
    tab-width 3
    fill-column 80)
-
-  (which-key-mode)
-  (set-fringe-mode 10)
-  (global-display-fill-column-indicator-mode 0)
-       
-  (prefer-coding-system 'utf-8) ; Use UTF-8 everywhere.
-  (defalias 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
 ** Global key bindings
@@ -90,21 +100,18 @@
     ))
 #+END_SRC
 
-* Modeline
-#+BEGIN_SRC emacs-lisp
-#+END_SRC
-
 * Git
 #+begin_src emacs-lisp
   (use-package git-gutter
     :ensure nil
     :defer t
+    :init
+     (global-git-gutter-mode 1)
     :config
      (setq git-gutter:update-interval 0.03)
      (set-face-foreground 'git-gutter:modified "blue violet")
      (set-face-foreground 'git-gutter:added "chartreuse4")
-     (set-face-foreground 'git-gutter:deleted "OrangeRed3")
-    :hook (after-init . global-git-gutter-mode))
+     (set-face-foreground 'git-gutter:deleted "OrangeRed3"))
 #+end_src
 
 * Theme
@@ -114,20 +121,48 @@
   (load-theme 'nooonso t)
 #+END_SRC
 
-* Ivy
+* Auto completion
+** Minubuffer
 #+BEGIN_SRC emacs-lisp
-  (use-package ivy
-    :demand t
-    :bind (
-      :map ivy-minibuffer-map
-      ("C-RET" . 'ivy-done)		  
-     )
-    :config
-     (setq ivy-height-alist
-      `((t . ,(lambda (_caller) (/ (frame-height) 2)))))
-     (ivy-mode))
+  (use-package vertico
+   :init
+   (vertico-mode))
+             
+  (use-package consult
+   :init
+   (advice-add #'register-preview :override #'consult-register-window)
+   (setq
+     register-preview-delay 0.5
+     xref-show-xrefs-function #'consult-xref
+     xref-show-definitions-function #'consult-xref)
+   :config
+   (consult-customize
+    consult-theme :preview-key '(:debounce 0.2 any)
+    consult-ripgrep consult-git-grep consult-grep consult-man
+    consult-bookmark consult-recent-file consult-xref
+    consult-source-bookmark consult-source-file-register
+    consult-source-recent-file consult-source-project-recent-file
+    :preview-key '(:debounce 0.4 any))
+   (setq consult-narrow-key "<")
+  )
 #+END_SRC
+** Inbuffer
+#+BEGIN_SRC emacs-lisp
+  (use-package corfu
+   :init
+   (global-corfu-mode)
+   :config
+   (setq
+    corfu-auto t
+    corfu-auto-delay 0.2
+    corfu-auto-trigger "."))
 
+  (use-package orderless
+    :custom
+    (custom-styles '(orderless basic))
+    (completion-category-overrides '((file (styles partial-completion))))
+    (completion-pcm-leading-wildcard t))
+#+END_SRC
 * Org-mode
 ** Generic settings
 #+BEGIN_SRC emacs-lisp
