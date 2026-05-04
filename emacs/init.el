@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
- '(package-selected-packages '(beacon git-gutter nerd-icons olivetti org-modern undo-fu)))
+ '(package-selected-packages '(git-gutter nerd-icons olivetti org-modern undo-fu)))
 
 (setq comp-deferred-compilation t)
 

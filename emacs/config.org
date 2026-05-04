@@ -48,7 +48,8 @@
 ** Global key bindings
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (global-set-key (kbd "C-<tab>") #'other-window)
+  (global-set-key (kbd "C-<tab>") 'other-frame)
+  (global-set-key (kbd "M-C-<tab>") 'other-window)
   (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
   (global-set-key (kbd "<f5>") 'org-agenda)
   (global-set-key (kbd "<f6>") 'org-capture)
@@ -81,9 +82,6 @@
     :hook
     ((org-mode org-agenda-mode) . olivetti-mode)
     :bind ("<f3>" . olivetti-mode))
-
-  (use-package beacon
-    :hook (after-init . beacon-mode))
 
   (use-package undo-fu
     :bind (
