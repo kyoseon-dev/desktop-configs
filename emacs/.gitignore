@@ -7,6 +7,7 @@ eln-cache
 elpa
 eshell
 history
+org-roam.db
 recentf
 tramp
 transient
