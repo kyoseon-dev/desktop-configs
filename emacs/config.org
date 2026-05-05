@@ -3,180 +3,159 @@
 
 * Preparing for lift-off
 #+BEGIN_SRC emacs-lisp
-  (defun nooonso/reload-config ()
-   "Reload init file, which will effectively reload everything"
-   (interactive)
-   (load-file (expand-file-name "init.el" user-emacs-directory)))
+(defun nooonso/reload-config ()
+  "Reload init file, which will effectively reload everything"
+  (interactive)
+  (load-file (expand-file-name "init.el" user-emacs-directory)))
 
-  (add-to-list 'default-frame-alist '(undecorated . t))
-  (tool-bar-mode -1)
-  (menu-bar-mode -1)
-  (scroll-bar-mode -1)
-  (defun display-startup-echo-area-message () (message ""))
-  (add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
+(add-to-list 'default-frame-alist '(undecorated . t))
+(tool-bar-mode -1)
+(menu-bar-mode -1)
+(scroll-bar-mode -1)
+(defun display-startup-echo-area-message () (message ""))
+(add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
 #+END_SRC
 
 * Global Generic Settings
 ** Options
 #+BEGIN_SRC emacs-lisp
-  (use-package emacs
-   :custom
-   (context-menu-mode t)
-   (tab-always-indent 'complete)
-   (text-mode-ispell-word-completion nil)
-   (read-extended-command-predicate
-    #'command-completion-default-include-p)
-   (minibuffer-prompt-properties
-    '(read-only t cursor-intangible t face minibuffer-prompt))
-   :config
-   (which-key-mode)
-   (set-fringe-mode 0)
-   (global-display-fill-column-indicator-mode 0)
-   (prefer-coding-system 'utf-8)
-   (defalias 'yes-or-no-p 'y-or-n-p))
+(use-package emacs
+  :custom
+  (context-menu-mode t)
+  (tab-always-indent 'complete)
+  (text-mode-ispell-word-completion nil)
+  (read-extended-command-predicate
+   #'command-completion-default-include-p)
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt))
+  :config
+  (which-key-mode)
+  (set-fringe-mode 0)
+  (global-display-fill-column-indicator-mode 0)
+  (prefer-coding-system 'utf-8)
+  (defalias 'yes-or-no-p 'y-or-n-p))
 
-  (setq
-   visible-bell nil
-   ring-bell-function 'ignore
-   select-enable-clipboard t ; use the clipboard in addition to kill-ring
-   large-file-warning-threshold nil
-   split-height-threshold 40
+(setq
+ visible-bell nil
+ ring-bell-function 'ignore
+ select-enable-clipboard t ; use the clipboard in addition to kill-ring
+ large-file-warning-threshold nil
+ split-height-threshold 40
 
-   comp-deferred-compilation t
-   inhibit-compacting-font-caches t
-   backup-inhibited 1
-   auto-save-default nil)
+ comp-deferred-compilation t
+ inhibit-compacting-font-caches t
+ backup-inhibited 1
+ auto-save-default nil)
 
-  (setq-default
-   indent-tabs-mode nil
-   tab-stop 3
-   tab-width 3
-   fill-column 80)
+(setq-default
+ indent-tabs-mode nil
+ tab-stop 3
+ tab-width 3
+ fill-column 80)
 #+END_SRC
 
 ** Global key bindings
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-  (global-set-key (kbd "C-<tab>") 'other-frame)
-  (global-set-key (kbd "M-C-<tab>") 'other-window)
-  (global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
-  (global-set-key (kbd "<f5>") 'org-agenda)
-  (global-set-key (kbd "<f6>") 'org-capture)
-  (global-set-key (kbd "<f7>") 'ibuffer)
-  (global-set-key (kbd "<f8>") 'dired)
+(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
+(global-set-key (kbd "C-<tab>") 'other-frame)
+(global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
+(global-set-key (kbd "<f5>") 'org-agenda)
+(global-set-key (kbd "<f6>") 'org-capture)
+(global-set-key (kbd "<f7>") 'ibuffer)
+(global-set-key (kbd "<f8>") 'dired)
 #+END_SRC
 
 ** Line numbers
 #+begin_src emacs-lisp
-  (global-display-line-numbers-mode 1)
+(global-display-line-numbers-mode 1)
 
-  (setq-default
-   display-line-numbers-width 5
-   display-line-numbers-type 'relative)
+(setq-default
+ display-line-numbers-width 5
+ display-line-numbers-type 'relative)
 
-  (dolist
+(dolist
     (mode
      '(term-mode-hook
        shell-mode-hook
        help-mode-hook
        org-agenda-mode-hook
        eshell-mode-hook))
-     (add-hook mode (lambda () (display-line-numbers-mode 0))))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
 #+end_src
 
 ** Misc
 #+BEGIN_SRC emacs-lisp
-  (use-package olivetti
-   :ensure nil
-   :hook
-   ((org-mode org-agenda-mode) . olivetti-mode)
-   :bind
-   ("<f3>" . olivetti-mode))
+(use-package olivetti
+  :ensure nil
+  :hook
+  ((org-mode org-agenda-mode) . olivetti-mode)
+  :bind
+  ("<f3>" . olivetti-mode))
 
-  (use-package undo-fu
-    :bind
-    (("C-/" . 'undo-fu-only-undo)
-     ("C-S-r" . 'undo-fu-only-redo)))
+(use-package undo-fu
+  :bind
+  (("C-/" . 'undo-fu-only-undo)
+   ("C-S-r" . 'undo-fu-only-redo)))
 #+END_SRC
 
 * Git
 #+begin_src emacs-lisp
-  (use-package git-gutter
-    :ensure nil
-    :defer t
-    :init
-     (global-git-gutter-mode 1)
-    :config
-     (setq git-gutter:update-interval 0.03)
-     (set-face-foreground 'git-gutter:modified "blue violet")
-     (set-face-foreground 'git-gutter:added "chartreuse4")
-     (set-face-foreground 'git-gutter:deleted "OrangeRed3"))
+(use-package git-gutter
+  :ensure nil
+  :defer t
+  :init
+  (global-git-gutter-mode 1)
+  :config
+  (setq git-gutter:update-interval 0.03)
+  (set-face-foreground 'git-gutter:modified "blue violet")
+  (set-face-foreground 'git-gutter:added "chartreuse4")
+  (set-face-foreground 'git-gutter:deleted "OrangeRed3"))
 #+end_src
 
 * Theme
 #+BEGIN_SRC emacs-lisp
-  (setq custom-theme-load-path
-         '("~/.config/emacs/theme/" custom-theme-directory t))
-  (load-theme 'nooonso t)
+(setq custom-theme-load-path
+      '("~/.config/emacs/theme/" custom-theme-directory t))
+(load-theme 'nooonso t)
 #+END_SRC
 
 * Auto completion
-** Minubuffer
+** Minibuffer
 #+BEGIN_SRC emacs-lisp
-  (use-package vertico
-   :init
-   (vertico-mode))
-             
-  (use-package consult
-   :init
-   (advice-add #'register-preview :override #'consult-register-window)
-   (setq
-    register-preview-delay 0.5
-    xref-show-xrefs-function #'consult-xref
-    xref-show-definitions-function #'consult-xref)
-   :config
-   (consult-customize
-    consult-theme :preview-key '(:debounce 0.2 any)
-    consult-ripgrep consult-git-grep consult-grep consult-man
-    consult-bookmark consult-recent-file consult-xref
-    consult-source-bookmark consult-source-file-register
-    consult-source-recent-file consult-source-project-recent-file
-    :preview-key '(:debounce 0.4 any))
-   (setq consult-narrow-key "<")
-  )
+(use-package vertico
+  :ensure t
+  :init
+  (vertico-mode))
+
+(use-package savehist
+  :init
+  (savehist-mode))
+
+(use-package marginalia
+  :after vertico
+  :ensure t
+  :init
+  (marginalia-mode))
 #+END_SRC
 ** Inbuffer
 #+BEGIN_SRC emacs-lisp
-  (use-package corfu
-   :init
-   (global-corfu-mode)
-   :config
-   (setq
-    corfu-auto t
-    corfu-auto-delay 0.1
-    corfu-auto-trigger "."))
-  
-  (use-package orderless
-   :custom
-   (custom-styles '(orderless basic))
-   (completion-category-overrides '((file (styles partial-completion))))
-   (completion-pcm-leading-wildcard t))
-
-  (use-package company
-   :init
-   (global-company-mode))
+(use-package corfu
+  :init
+  (global-corfu-mode)
+  :config
+  (setq corfu-auto t))
 #+END_SRC
 
 * LSP
 #+BEGIN_SRC emacs-lisp
   (use-package rust-ts-mode
-   :ensure rust-ts-mode
-   :mode "\\.rs\\'"
-   :defer t)
+    :ensure rust-ts-mode
+    :mode "\\.rs\\'"
+    :defer t)
   (use-package lua-ts-mode
-   :ensure lua-ts-mode
-   :mode "\\.lua\\'"
-   :defer t)
+    :ensure lua-ts-mode
+    :mode "\\.lua\\'"
+    :defer t)
 #+END_SRC
 
 * Org-mode

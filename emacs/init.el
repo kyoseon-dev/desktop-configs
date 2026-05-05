@@ -6,8 +6,7 @@
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(company consult corfu git-gutter nerd-icons olivetti orderless org-modern
-             undo-fu vertico)))
+   '(corfu git-gutter marginalia nerd-icons olivetti org-modern undo-fu vertico)))
 
 (setq comp-deferred-compilation t)
 

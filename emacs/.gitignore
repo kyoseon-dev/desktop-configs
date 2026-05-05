@@ -6,6 +6,7 @@ config.el
 eln-cache
 elpa
 eshell
+history
 recentf
 tramp
 transient
