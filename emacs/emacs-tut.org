@@ -70,7 +70,19 @@
 ** Searching
 - C-s: Forward search
 - C-r: Backward search
-
+** Dired
+- m: mark
+- u: unmark
+- U: unmark all
+- C: copy
+- R: rename
+- d: mark for delete
+- D: delete
+- x: execute delition
+- Z: compress/uncompress
+- c: compress selections to a specific file
+- S: create symbolic link
+- L: load .el into Emacs
 * Org-mode
 ** Headline & outline
 - Increase or decrease level: "M-<right>" or "M-<left>"

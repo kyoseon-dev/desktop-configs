@@ -3,6 +3,14 @@
 
 * Preparing for lift-off
 #+BEGIN_SRC emacs-lisp
+(defun nooonso/display-startup-time ()
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
+(add-hook 'emacs-startup-hook #'nooonso/display-startup-time)
+
 (defun nooonso/reload-config ()
   "Reload init file, which will effectively reload everything"
   (interactive)
@@ -22,30 +30,28 @@
 (use-package emacs
   :custom
   (context-menu-mode t)
+  (save-place-mode 1)
+  (global-auto-revert-mode 1)
+  (global-auto-revert-non-file-buffers t)
   (tab-always-indent 'complete)
   (text-mode-ispell-word-completion nil)
-  (read-extended-command-predicate
-   #'command-completion-default-include-p)
-  (minibuffer-prompt-properties
-   '(read-only t cursor-intangible t face minibuffer-prompt))
+  (ring-bell-function 'ignore)
+  (visible-bell nil)
+  (select-enable-clipboard t)
+  (large-file-warning-threshold nil)
+  (split-height-threshold 40)
+  (backup-inhibited 1)
+  (auto-saved-default nil)
+  (inhibit-compacting-font-caches t)
+  (comp-deferred-compilation t)
+  (recentf-mode 1)
+  (scroll-preserve-screen-position 'always)
   :config
   (which-key-mode)
   (set-fringe-mode 0)
   (global-display-fill-column-indicator-mode 0)
   (prefer-coding-system 'utf-8)
   (defalias 'yes-or-no-p 'y-or-n-p))
-
-(setq
- visible-bell nil
- ring-bell-function 'ignore
- select-enable-clipboard t ; use the clipboard in addition to kill-ring
- large-file-warning-threshold nil
- split-height-threshold 40
-
- comp-deferred-compilation t
- inhibit-compacting-font-caches t
- backup-inhibited 1
- auto-save-default nil)
 
 (setq-default
  indent-tabs-mode nil
@@ -87,8 +93,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package olivetti
   :ensure nil
-  :hook
-  ((org-mode org-agenda-mode) . olivetti-mode)
+  ;:hook
+  ;((org-mode org-agenda-mode) . olivetti-mode)
   :bind
   ("<f3>" . olivetti-mode))
 
@@ -103,10 +109,11 @@
 (use-package git-gutter
   :ensure nil
   :defer t
+  :custom
+  (git-gutter:update-interval 0.03)
   :init
   (global-git-gutter-mode 1)
   :config
-  (setq git-gutter:update-interval 0.03)
   (set-face-foreground 'git-gutter:modified "blue violet")
   (set-face-foreground 'git-gutter:added "chartreuse4")
   (set-face-foreground 'git-gutter:deleted "OrangeRed3"))
@@ -140,10 +147,10 @@
 ** Inbuffer
 #+BEGIN_SRC emacs-lisp
 (use-package corfu
+  :custom
+  (corfu-auto t)
   :init
-  (global-corfu-mode)
-  :config
-  (setq corfu-auto t))
+  (global-corfu-mode))
 #+END_SRC
 
 * LSP
@@ -161,23 +168,25 @@
 * Org-mode
 ** Generic settings
 #+BEGIN_SRC emacs-lisp
-  (use-package org-modern
-   :hook
-   (org-mode . org-modern-mode)
-   (org-mode . org-indent-mode)
-  )
+(use-package org
+  :custom
+  (org-src-preserve-indentation 1)
+  (org-hidden-keywords '(title))
+  (org-support-shift-select t)
+  (org-hide-emphasis-markers t) ; Hide the italic/bold... markers
+  (org-cycle-level-faces nil)
+  (org-n-level-faces 4)
+  (org-startup-indented t)
+  (org-indent-indentation-per-level 2)
+  (org-tags-column 0)
+  (org-return-follows-link  t)) ; Follow the links
 
-  (setq
-   org-src-preserve-indentation 1
-   org-hidden-keywords '(title)
-   org-support-shift-select t
-   org-hide-emphasis-markers t ; Hide the italic/bold... markers
-   org-cycle-level-faces nil
-   org-n-level-faces 4
-   org-startup-indented t
-   org-indent-indentation-per-level 2
-   org-tags-column 0
-   org-return-follows-link  t) ; Follow the links
+(use-package org-modern
+  :after org
+  :hook
+  (org-mode . org-modern-mode)
+  (org-mode . org-indent-mode)
+  )
 #+END_SRC
 ** Org-todo
 #+BEGIN_SRC emacs-lisp
@@ -238,19 +247,20 @@
 (use-package org-roam
   :init
   (setq org-roam-v2-ack t)
-  (setq org-roam-dailies-directory "journal/")
   :custom
+  (org-roam-dailies-directory "Journals/")
   (org-roam-directory (file-truename "~/Documents/RoamNotes"))
+  (org-roam-completion-everywhere t)
   (org-roam-dailies-capture-templates
    '(("d" "default" entry "* %<%I:%M %p>: %?"
       :if-new (file+head "%<%Y-%m-%d>.org"
                          "#+title: %<%Y-%m-%d>\n")
       :unnarrowed nil)
-     ("b" "book notes" plain
-      (file "~/Documents/RoamNotes/Templates/book-notes.org")
-      :if-new (file+head "%<%Y-%m-%d>.org"
-                         "#+title: %<%Y-%m-%d>\n")
-      :unnarrowed t)
+     ;("b" "book notes" plain
+     ; (file "~/Documents/RoamNotes/Templates/book-notes.org")
+     ; :if-new (file+head "%<%Y-%m-%d>.org"
+     ;                    "#+title: %^{title}\n")
+     ; :unnarrowed t)
      )
    )
   :bind (("C-c n l" . org-roam-buffer-toggle)

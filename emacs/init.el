@@ -5,7 +5,9 @@
  ;; If there is more than one, they won't work right.
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
- '(package-selected-packages nil))
+ '(package-selected-packages
+   '(corfu eglot git-gutter marginalia nerd-icons olivetti org-mode org-modern
+           org-roam posframe undo-fu vertico)))
 
 (setq comp-deferred-compilation t)
 
