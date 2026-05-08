@@ -41,7 +41,7 @@
   (select-enable-clipboard t)
   (large-file-warning-threshold nil)
   (backup-inhibited 1)
-  (auto-saved-default nil)
+  (auto-save-default nil)
   (inhibit-compacting-font-caches t)
   (comp-deferred-compilation t)
   (recentf-mode 1)
@@ -70,6 +70,7 @@
 (keymap-global-set "<f6>" 'org-capture)
 (keymap-global-set "<f7>" 'ibuffer)
 (keymap-global-set "<f8>" 'dired)
+(keymap-global-set "<f9>" 'bookmark-bmenu-list)
 #+END_SRC
 
 ** Line numbers
