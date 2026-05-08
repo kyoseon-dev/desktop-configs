@@ -4,6 +4,7 @@
 * Preparing for lift-off
 #+BEGIN_SRC emacs-lisp
 (defun nooonso/display-startup-time ()
+  (interactive)
   (message "Emacs loaded in %s with %d garbage collections."
            (format "%.2f seconds"
                    (float-time
@@ -21,7 +22,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (defun display-startup-echo-area-message () (message ""))
-(add-to-list 'load-path (expand-file-name "packages/" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lib/" user-emacs-directory))
 #+END_SRC
 
 * Global Generic Settings
@@ -39,36 +40,36 @@
   (visible-bell nil)
   (select-enable-clipboard t)
   (large-file-warning-threshold nil)
-  (split-height-threshold 40)
   (backup-inhibited 1)
   (auto-saved-default nil)
   (inhibit-compacting-font-caches t)
   (comp-deferred-compilation t)
   (recentf-mode 1)
   (scroll-preserve-screen-position 'always)
+  (read-file-name-completion-ignore-case t)
+  (read-buffer-completion-ignore-case t)
+  (completion-ignore-case t)
+  (indent-tabs-mode nil)
+  (tab-stop 3)
+  (tab-width 3)
   :config
   (which-key-mode)
   (set-fringe-mode 0)
   (global-display-fill-column-indicator-mode 0)
   (prefer-coding-system 'utf-8)
   (defalias 'yes-or-no-p 'y-or-n-p))
-
-(setq-default
- indent-tabs-mode nil
- tab-stop 3
- tab-width 3
- fill-column 80)
 #+END_SRC
 
 ** Global key bindings
 #+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "<escape>") 'keyboard-escape-quit)
-(global-set-key (kbd "C-<tab>") 'other-frame)
-(global-set-key (kbd "<f4>") 'bookmark-bmenu-list)
-(global-set-key (kbd "<f5>") 'org-agenda)
-(global-set-key (kbd "<f6>") 'org-capture)
-(global-set-key (kbd "<f7>") 'ibuffer)
-(global-set-key (kbd "<f8>") 'dired)
+(keymap-global-set "C-<tab>" 'other-frame)
+(keymap-global-set "C-M-<tab>" 'other-window)
+(keymap-global-set "C-M-;" 'kill-whole-line)
+(keymap-global-set "C-;" 'delete-backward-char)
+(keymap-global-set "<f5>" 'org-agenda)
+(keymap-global-set "<f6>" 'org-capture)
+(keymap-global-set "<f7>" 'ibuffer)
+(keymap-global-set "<f8>" 'dired)
 #+END_SRC
 
 ** Line numbers
@@ -96,12 +97,12 @@
   ;:hook
   ;((org-mode org-agenda-mode) . olivetti-mode)
   :bind
-  ("<f3>" . olivetti-mode))
+  ("C-c o" . olivetti-mode))
 
 (use-package undo-fu
   :bind
   (("C-/" . 'undo-fu-only-undo)
-   ("C-S-r" . 'undo-fu-only-redo)))
+   ("C-?" . 'undo-fu-only-redo)))
 #+END_SRC
 
 * Git
@@ -245,6 +246,7 @@
 ** Org-roam
 #+BEGIN_SRC emacs-lisp
 (use-package org-roam
+  :ensure t
   :init
   (setq org-roam-v2-ack t)
   :custom
@@ -274,7 +276,6 @@
   :bind-keymap
   ("C-c n d" . org-roam-dailies-map)
   :config
-  (org-roam-setup)
-  (org-roam-db-autosync-mode)
-  (require 'org-roam-dailies))
+  (require 'org-roam-dailies)
+  (org-roam-db-autosync-mode))
 #+END_SRC

@@ -11,14 +11,16 @@
 - C-p: Previous line
 - C-f: Forward char
 - C-b: Backward char
+- C-o: Open line
+- C-M-o: Open line at cursor position
 - M-f: Forward word
 - M-b: Backward word
 - C-a: Beginning of line
 - C-e: End of line
 - M-a: Beginning of sentence
 - M-e: End of sentence
-- M-<: Beginning of whole text
-- M->: End of whole text
+- M-<: Beginning of buffer
+- M->: End of buffer
 - Repeat command: C-u/M digit, ex: C-u 8 C-v or M-8 C-v
 ** Window
 - C-x o: jump to other window
@@ -30,7 +32,7 @@
 ** Frame
 - C-x 5 2: new frame
 - C-x 5 c: copy frame
-- C-x 5 0: remove frame
+- C-x 5 0: delete frame
 ** Insert and Delete
 - C-d: Delete the next character
 - M-d: Kill the next word
@@ -65,24 +67,9 @@
 - C-x C-c  : Quit Emacs
 - C-x k    : Kill buffer
 - C-x z    : Repeat last command and type 'z' for next repeat
-** Replace string
-- M-x repl s<ret>changed<ret>altered<ret>
 ** Searching
 - C-s: Forward search
 - C-r: Backward search
-** Dired
-- m: mark
-- u: unmark
-- U: unmark all
-- C: copy
-- R: rename
-- d: mark for delete
-- D: delete
-- x: execute delition
-- Z: compress/uncompress
-- c: compress selections to a specific file
-- S: create symbolic link
-- L: load .el into Emacs
 * Org-mode
 ** Headline & outline
 - Increase or decrease level: "M-<right>" or "M-<left>"
@@ -265,3 +252,4 @@ SCHEDULED: <2026-04-22 Wed>
   * orderless: backend completion style
   * cape: backend completion functions
   * eglot: backend LSP client
+    
