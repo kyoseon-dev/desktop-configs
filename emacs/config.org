@@ -21,7 +21,7 @@
 (tool-bar-mode -1)
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
-(defun display-startup-echo-area-message () (message ""))
+
 (add-to-list 'load-path (expand-file-name "lib/" user-emacs-directory))
 #+END_SRC
 
@@ -125,7 +125,7 @@
 #+BEGIN_SRC emacs-lisp
 (setq custom-theme-load-path
       '("~/.config/emacs/theme/" custom-theme-directory t))
-(load-theme 'nooonso t)
+(load-theme 'skel t)
 #+END_SRC
 
 * Auto completion
@@ -172,6 +172,8 @@
 #+BEGIN_SRC emacs-lisp
 (use-package org
   :custom
+  (org-hide-block-startup t)
+  (org-startup-folded "fold")
   (org-src-preserve-indentation 1)
   (org-hidden-keywords '(title))
   (org-support-shift-select t)

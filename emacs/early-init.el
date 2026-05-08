@@ -1,5 +1,4 @@
-(setq package-enable-at-startup nil     ; Disable package.el in favor of straight.el
-      inhibit-startup-message t
+(setq inhibit-startup-message t
       frame-resize-pixelwise t
       package-native-compile t)
 
