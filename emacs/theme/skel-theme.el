@@ -5,7 +5,7 @@
 
 (custom-theme-set-faces
   'skel 
-  '(default ((t (:background "#1e1e27" :foreground "#cfbfad"))))
+  '(default ((t (:background "#121317" :foreground "#cfbfad"))))
   '(region ((t (:background "#404040"))))
   '(line-number ((t (:foreground "dim gray"))))
   '(line-number-current-line ((t (:foreground "gray90" :background "gray20"))))

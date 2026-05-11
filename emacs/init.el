@@ -6,8 +6,8 @@
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(corfu eglot git-gutter marginalia nerd-icons olivetti org-mode org-modern
-           org-roam posframe undo-fu vertico)))
+   '(corfu eglot git-gutter marginalia nerd-icons olivetti orderless
+           org-modern org-roam posframe undo-fu vertico)))
 
 (setq comp-deferred-compilation t)
 

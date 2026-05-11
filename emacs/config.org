@@ -1,5 +1,4 @@
 #+TITLE:NoooNso emacs config
-#+STARTUP: fold
 
 * Preparing for lift-off
 #+BEGIN_SRC emacs-lisp
@@ -47,6 +46,7 @@
   (recentf-mode 1)
   (scroll-preserve-screen-position 'always)
   (read-file-name-completion-ignore-case t)
+  (read-extend-command-predicate #'command-completion-default-include-p)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
   (indent-tabs-mode nil)
@@ -146,6 +146,7 @@
   :init
   (marginalia-mode))
 #+END_SRC
+
 ** Inbuffer
 #+BEGIN_SRC emacs-lisp
 (use-package corfu
@@ -153,6 +154,17 @@
   (corfu-auto t)
   :init
   (global-corfu-mode))
+#+END_SRC
+
+** Both
+#+BEGIN_SRC emacs-lisp
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-pcm-leading-wildcard t))
+  ;; Emacs 31: partial-completion behaves like substring
 #+END_SRC
 
 * LSP
@@ -165,6 +177,10 @@
     :ensure lua-ts-mode
     :mode "\\.lua\\'"
     :defer t)
+  (use-package c-ts-mode
+    :ensure c-ts-mode
+    :mode "\\.c\\'"
+    :defer t)
 #+END_SRC
 
 * Org-mode
@@ -172,6 +188,7 @@
 #+BEGIN_SRC emacs-lisp
 (use-package org
   :custom
+  (org-startup-with-inline-images t)
   (org-hide-block-startup t)
   (org-startup-folded "fold")
   (org-src-preserve-indentation 1)
