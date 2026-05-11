@@ -1,43 +1,35 @@
+vim.pack.add{
+	{ src = "https://github.com/neovim/nvim-lspconfig" }
+}
+
 vim.lsp.enable({
+	'clangd',
 	'rust-analyzer',
 	'lua_ls',
 })
+vim.o.autocomplete = true
+vim.opt.complete:append('o')
+vim.opt.completeopt = { 'menuone', 'noselect' }
 
 vim.diagnostic.config({
-	virtual_text = false,
-	sign = true,
-	update_in_insert = true,
-	underline = true,
-	serverity_sort = false,
 	float = {
 		border = "single",
-		source = "always",
 	},
 })
 
-local sign = function(opts)
-	vim.fn.sign_define(opts.name, {
-		texthl = opts.name,
-		text = opts.text,
-	})
-end
-
-sign({ name = "DiagnosticSignError", text = "" })
-sign({ name = "DiagnosticSignWarn", text = "" })
-sign({ name = "DiagnosticSignHint", text = "⚑" })
-sign({ name = "DiagnosticSignInfo", text = "" })
-
-vim.api.nvim_create_autocmd("LspAttach", {
+vim.api.nvim_create_autocmd('LspAttach', {
 	group = vim.api.nvim_create_augroup("UserLspConfig", { clear = true }),
 	callback = function(ev)
-		-- Enable completion triggered by <c-x><c-o>
-		vim.bo[ev.buf].omnifunc = "v:lua.vim.lsp.omnifunc"
-
-		vim.lsp.completion.enable(true, ev.data.client_id, ev.buf, { auto_trigger = true, })
+		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+		if client:supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, ev.buf, { auto_trigger = true, })
+		end
 
 		-- Buffer local mappings.
 		local opts = { buffer = ev.buf }
 
+		-- "i" "C-x" lsp map
+		-- "S-k" info
 		vim.keymap.set("n", "<leader>le", vim.diagnostic.open_float, opts)
 		vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, opts)
 		vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, opts)

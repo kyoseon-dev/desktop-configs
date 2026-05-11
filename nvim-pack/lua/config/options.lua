@@ -22,10 +22,6 @@ vim.opt.fillchars = {
 	eob = "·",
 }
 
-vim.o.autocomplete = true
-vim.o.pummaxwidth = 40
-vim.o.completeopt = 'menu,menuone,noselect,noinsert'
-
 --vim.opt.shortmess:append("c")
 
 vim.o.updatetime = 200
