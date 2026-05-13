@@ -1,8 +1,9 @@
 ;; -*- lexical-binding: t; -*-
-;;; skel-theme.el --- port of inkpot theme 
+;;; skel-theme.el --- port of inkpot theme
 
 (deftheme skel)
 
+;; refer M-x list-faces-display
 (custom-theme-set-faces
   'skel 
   '(default ((t (:background "#121317" :foreground "#cfbfad"))))

@@ -6,8 +6,10 @@
  '(font-use-system-font t)
  '(inhibit-startup-screen t)
  '(package-selected-packages
-   '(corfu eglot git-gutter marginalia nerd-icons olivetti orderless
-           org-modern org-roam posframe undo-fu vertico)))
+   '(all-the-icons all-the-icons-completion all-the-icons-nerd-fonts
+                   corfu dash eglot frame-local git-gutter kind-icon
+                   nerd-icons nerd-icons-completion nerd-icons-corfu
+                   olivetti org-modern org-roam posframe undo-fu)))
 
 (setq comp-deferred-compilation t)
 

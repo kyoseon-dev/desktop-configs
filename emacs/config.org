@@ -49,15 +49,17 @@
   (read-extend-command-predicate #'command-completion-default-include-p)
   (read-buffer-completion-ignore-case t)
   (completion-ignore-case t)
+  (completion-styles '(partial-completion))
   (indent-tabs-mode nil)
   (tab-stop 3)
   (tab-width 3)
   :config
-  (which-key-mode)
   (set-fringe-mode 0)
   (global-display-fill-column-indicator-mode 0)
   (prefer-coding-system 'utf-8)
-  (defalias 'yes-or-no-p 'y-or-n-p))
+  (defalias 'yes-or-no-p 'y-or-n-p)
+  :init
+  (fido-vertical-mode))
 #+END_SRC
 
 ** Global key bindings
@@ -129,58 +131,41 @@
 #+END_SRC
 
 * Auto completion
-** Minibuffer
-#+BEGIN_SRC emacs-lisp
-(use-package vertico
-  :ensure t
-  :init
-  (vertico-mode))
-
-(use-package savehist
-  :init
-  (savehist-mode))
-
-(use-package marginalia
-  :after vertico
-  :ensure t
-  :init
-  (marginalia-mode))
-#+END_SRC
-
 ** Inbuffer
 #+BEGIN_SRC emacs-lisp
-(use-package corfu
-  :custom
-  (corfu-auto t)
-  :init
-  (global-corfu-mode))
-#+END_SRC
+  (use-package corfu
+    :ensure t
+    :custom
+    (corfu-auto t)
+    :init
+    (global-corfu-mode))
 
-** Both
-#+BEGIN_SRC emacs-lisp
-(use-package orderless
-  :ensure t
-  :custom
-  (completion-styles '(orderless basic))
-  (completion-category-overrides '((file (styles partial-completion))))
-  (completion-pcm-leading-wildcard t))
-  ;; Emacs 31: partial-completion behaves like substring
+  (use-package kind-icon
+    :ensure t
+    :defer nil
+    :after corfu
+    :config
+    (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 #+END_SRC
 
 * LSP
 #+BEGIN_SRC emacs-lisp
-  (use-package rust-ts-mode
-    :ensure rust-ts-mode
-    :mode "\\.rs\\'"
-    :defer t)
-  (use-package lua-ts-mode
-    :ensure lua-ts-mode
-    :mode "\\.lua\\'"
-    :defer t)
-  (use-package c-ts-mode
-    :ensure c-ts-mode
-    :mode "\\.c\\'"
-    :defer t)
+(use-package rust-ts-mode
+  :ensure rust-ts-mode
+  :mode "\\.rs\\'"
+  :defer t
+  :hook ((rust-ts-mode . eglot-ensure)))
+
+(use-package lua-ts-mode
+  :ensure lua-ts-mode
+  :mode "\\.lua\\'"
+  :defer t)
+
+(use-package c-ts-mode
+  :ensure nil
+  :mode "\\.c\\'"
+  :defer t
+  :hook ((c-ts-mode . eglot-ensure)))
 #+END_SRC
 
 * Org-mode
@@ -209,6 +194,7 @@
   (org-mode . org-indent-mode)
   )
 #+END_SRC
+
 ** Org-todo
 #+BEGIN_SRC emacs-lisp
   (setq
@@ -231,6 +217,7 @@
    org-tag-alist ; C-q
    '(("TAIJI" . ?t) ("PAY" . ?p) ("ART" . ?a) ("DELVE" . ?d)))
 #+END_SRC
+
 ** Org-agenda
 #+BEGIN_SRC emacs-lisp
   (setq
@@ -288,8 +275,6 @@
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert)
-         :map org-mode-map
-         ("C-M-i" . completion-at-point)
          :map org-roam-dailies-map
          ("Y" . org-roam-dailies-capture-yesterday)
          ("T" . org-roam-dailies-capture-tomorrow))

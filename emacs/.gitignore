@@ -1,4 +1,5 @@
 \*scratch\*
+.cache
 .org-id-locations
 auto-save-list
 bookmarks
@@ -9,6 +10,7 @@ eshell
 history
 org-roam.db
 places
+projects
 recentf
 tramp
 transient
