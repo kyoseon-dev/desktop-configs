@@ -14,7 +14,15 @@
   (unless (derived-mode-p 'org-mode)
     (error "`org-modern-mode' should be enabled only in `org-mode'"))
   (cond
-   (org-beau-mode)
+   (org-beau-mode
+    (add-to-invisibility-spec 'org-beau)
+    ;; (setq
+    ;;  org-modern--folded-star-cache (vconcat (mapcar #'org-modern--symbol (mapcar #'car org-modern-fold-start)))
+    ;;  ord-modern--expanded-start-cache (and org-modern-star
+    ;;                                        (vconcat
+    ;;                                         (mapcar #'org-modern--symbol (mapcar #'cdr org-modern-fold-stars))))
+    ;;  )
+    )
    (t)
    )
   )

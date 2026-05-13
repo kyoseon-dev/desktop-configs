@@ -22,6 +22,9 @@
 - M-<: Beginning of buffer
 - M->: End of buffer
 - Repeat command: C-u/M digit, ex: C-u 8 C-v or M-8 C-v
+- C-SPC: Set mark
+- C-x C-x: Jump to mark and set region
+- C-u C-x C-x: Jump to mark
 ** Window
 - C-x o: jump to other window
 - C-x 0: kill current windows)

@@ -44,6 +44,7 @@
   '(org-agenda-date ((t (:foreground "#409090"))))
   '(org-agenda-date-weekend ((t (:weight normal :foreground "8b8bcd"))))
   '(org-agenda-date-today ((t (:weight bold :foreground "#cd8b00"))))
+  '(mode-line-active ((t (:background "#222545"))))
   
   ;'(org-table ((t (:foreground "#ccccde"))))
   ;'(org-table-header ((t (:bold t :foreground "#ff0000"))))
